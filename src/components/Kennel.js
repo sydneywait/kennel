@@ -65,14 +65,14 @@ class Kennel extends Component {
     ]
 
     petsFromAPI = [
-        { id: 1, name: "Oscar", ownerId: "1", animalId: "1" },
-        { id: 2, name: "Henny", ownerId: "2", animalId: "2" },
-        { id: 3, name: "Peanut", ownerId: "3", animalId: "3" },
-        { id: 4, name: "Polly", ownerId: "4", animalId: "4" },
-        { id: 5, name: "Charlie", ownerId: "5", animalId: "1" },
-        { id: 1, name: "Max", ownerId: "6", animalId: "2" },
-        { id: 1, name: "Spot", ownerId: "1", animalId: "3" },
-        { id: 1, name: "Sam", ownerId: "2", animalId: "4" },
+        { id: 1, name: "Oscar", ownerId: 1, animalId: 1 },
+        { id: 2, name: "Henny", ownerId: 2, animalId: 2 },
+        { id: 3, name: "Peanut", ownerId: 3, animalId: 3 },
+        { id: 4, name: "Polly", ownerId: 4, animalId: 4 },
+        { id: 5, name: "Charlie", ownerId: 5, animalId: 1 },
+        { id: 1, name: "Max", ownerId: 6, animalId: 2 },
+        { id: 1, name: "Spot", ownerId: 1, animalId: 3 },
+        { id: 1, name: "Sam", ownerId: 2, animalId: 4 },
     ]
 
     state = {
@@ -85,11 +85,11 @@ class Kennel extends Component {
 
     render() {
         return (
-            <article className="kennel">
+            <article className="kennel" key = "kennel">
                 <LocationList locations={this.state.locations} />
                 <EmployeeList employees={this.state.employees} />
-                <AnimalList animals={this.state.animals} />
-                {/* <PetList pets = {this.state.pets} /> */}
+                <AnimalList animals={this.state.animals} owners ={this.state.owners} pets={this.state.pets} />
+
             </article>
         )
     }
