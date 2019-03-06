@@ -1,0 +1,140 @@
+{
+    "employees": [
+        {
+            "id": 1,
+            "name": "Jessica Younker"
+        },
+        {
+            "id": 2,
+            "name": "Jordan Nelson"
+        },
+        {
+            "id": 3,
+            "name": "Zoe LeBlanc"
+        },
+        {
+            "id": 4,
+            "name": "Blaise Roberts"
+        }
+    ],
+    "locations": [
+        {
+            "id": 1,
+            "name": "Nashville North",
+            "address": "500 Circle Way"
+        },
+        {
+            "id": 2,
+            "name": "Nashville South",
+            "address": "10101 Binary Court"
+        }
+    ],
+    "animals": [
+        {
+            "id": 1,
+            "name": "cat"
+        },
+        {
+            "id": 2,
+            "name": "dog"
+        },
+        {
+            "id": 3,
+            "name": "chicken"
+        },
+        {
+            "id": 4,
+            "name": "hamster"
+        },
+        {
+            "id": 5,
+            "name": "horse"
+        },
+        {
+            "id": 6,
+            "name": "snake"
+        }
+    ],
+    "owners": [
+        {
+            "id": 1,
+            "name": "Ryan Tanay",
+            "phone": "304-123-4567"
+        },
+        {
+            "id": 2,
+            "name": "Emma Beaton",
+            "phone": "304-123-4567"
+        },
+        {
+            "id": 3,
+            "name": "Dani Adkins",
+            "phone": "304-123-4567"
+        },
+        {
+            "id": 4,
+            "name": "Adam Oswalt",
+            "phone": "304-123-4567"
+        },
+        {
+            "id": 5,
+            "name": "Fletcher Bangs",
+            "phone": "304-123-4567"
+        },
+        {
+            "id": 6,
+            "name": "Angela Lee",
+            "phone": "304-123-4567"
+        }
+    ],
+    "pets": [
+        {
+            "id": 1,
+            "name": "Oscar",
+            "ownerId": "1",
+            "animalId": "1"
+        },
+        {
+            "id": 2,
+            "name": "Henny",
+            "ownerId": "2",
+            "animalId": "2"
+        },
+        {
+            "id": 3,
+            "name": "Peanut",
+            "ownerId": "3",
+            "animalId": "3"
+        },
+        {
+            "id": 4,
+            "name": "Polly",
+            "ownerId": "4",
+            "animalId": "4"
+        },
+        {
+            "id": 5,
+            "name": "Charlie",
+            "ownerId": "5",
+            "animalId": "1"
+        },
+        {
+            "id": 6,
+            "name": "Max",
+            "ownerId": "6",
+            "animalId": "2"
+        },
+        {
+            "id": 7,
+            "name": "Spot",
+            "ownerId": "1",
+            "animalId": "3"
+        },
+        {
+            "id": 8,
+            "name": "Sam",
+            "ownerId": "2",
+            "animalId": "4"
+        }
+    ]
+}

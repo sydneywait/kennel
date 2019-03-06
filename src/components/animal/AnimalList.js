@@ -22,11 +22,4 @@ class AnimalList extends Component {
 export default AnimalList
 
 
-// this.props.pets.map(pet =>
-//     <div key={pet.id}>
-//         <strong><div>Name: {pet.name}</div></strong>
-//         <div>Type: {this.props.animals.find(animal=>animal.id===pet.animalId).type}</div>
-//         <div>Owner: {this.props.owners.find(owner =>owner.id === pet.ownerId).name}</div><br></br>
-//     </div>
-// )
 
