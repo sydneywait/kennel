@@ -22,3 +22,4 @@ class OwnerList extends Component {
 }
 
 export default OwnerList
+

@@ -4,6 +4,7 @@ import AnimalList from './animal/AnimalList'
 import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owner/OwnerList'
+import SearchResults from './search/SearchResults'
 
 
 export default class ApplicationViews extends Component {
@@ -14,7 +15,8 @@ export default class ApplicationViews extends Component {
         animals: [],
         employees: [],
         owners:[],
-        pets: []
+        pets: [],
+        petsWithInfo:[]
     }
 
 
@@ -37,6 +39,58 @@ export default class ApplicationViews extends Component {
             .then(r => r.json()))
             .then(pets => newState.pets = pets)
             .then(() => this.setState(newState))
+
+            // create an array for pets with info?
+    }
+
+    deleteAnimal = id => {
+        return fetch(`http://localhost:5002/animals/${id}`, {
+            method: "DELETE"
+        })
+        .then(e => e.json())
+        .then(() => fetch(`http://localhost:5002/animals`))
+        .then(e => e.json())
+        .then(animals => this.setState({
+            animals: animals
+        })
+      )
+    }
+
+    deleteLocation = id => {
+        return fetch(`http://localhost:5002/locations/${id}`, {
+            method: "DELETE"
+        })
+        .then(e => e.json())
+        .then(() => fetch(`http://localhost:5002/locations`))
+        .then(e => e.json())
+        .then(locations => this.setState({
+            locations: locations
+        })
+      )
+    }
+    deleteOwner = id => {
+        return fetch(`http://localhost:5002/owners/${id}`, {
+            method: "DELETE"
+        })
+        .then(e => e.json())
+        .then(() => fetch(`http://localhost:5002/owners`))
+        .then(e => e.json())
+        .then(owners => this.setState({
+            owners: owners
+        })
+      )
+    }
+    deleteEmployee = id => {
+        return fetch(`http://localhost:5002/employees/${id}`, {
+            method: "DELETE"
+        })
+        .then(e => e.json())
+        .then(() => fetch(`http://localhost:5002/employees`))
+        .then(e => e.json())
+        .then(employees => this.setState({
+            employees: employees
+        })
+      )
     }
 
 
@@ -46,17 +100,21 @@ export default class ApplicationViews extends Component {
         return (
             <React.Fragment >
                 <Route exact path="/" render={(props) => {
-                    return <LocationList locations={this.state.locations} />
+                    return <LocationList locations={this.state.locations} deleteLocation = {this.deleteLocation}/>
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} />
+                    return <AnimalList animals={this.state.animals} deleteAnimal={this.deleteAnimal} />
                 }} />
                 <Route path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} pets={this.state.pets} animals ={this.state.animals}/>
+                    return <OwnerList owners={this.state.owners} pets={this.state.pets} animals ={this.state.animals} deleteOwner={this.deleteOwner}/>
                 }} />
+                <Route path="/search" render={(props) =>{
+                    return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo}/>
+                }} />
+
             </React.Fragment >
         )
     }

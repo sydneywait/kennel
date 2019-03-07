@@ -1,17 +1,23 @@
-
-
 import React, { Component } from 'react'
+import employeeIcon from "./EmployeeIcon.png"
+import "./Employee.css"
 
-
-class EmployeeList extends Component {
-    render() {
+export default class EmployeeList extends Component {
+    render () {
         return (
             <section className="employees">
-            <h1>Employee List</h1>
             {
                 this.props.employees.map(employee =>
-                    <div key={employee.id}>
-                        {employee.name}
+                    <div key={employee.id} className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">
+                                <img src={employeeIcon} className="icon--employee" />
+                                {employee.name}
+                                <a href="#"
+                                    onClick={() => this.props.deleteEmployee(employee.id)}
+                                    className="card-link">Delete</a>
+                            </h5>
+                        </div>
                     </div>
                 )
             }
@@ -19,5 +25,3 @@ class EmployeeList extends Component {
         )
     }
 }
-
-export default EmployeeList
