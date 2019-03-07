@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import employeeIcon from "./EmployeeIcon.png"
 import "./Employee.css"
 
 export default class EmployeeList extends Component {

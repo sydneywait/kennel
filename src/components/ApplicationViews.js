@@ -5,6 +5,11 @@ import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owner/OwnerList'
 import SearchResults from './search/SearchResults'
+import AnimalAPIManager from "../modules/AnimalManager"
+import EmployeeAPIManager from "../modules/EmployeeManager"
+import LocationAPIManager from "../modules/LocationManager"
+import OwnerAPIManager from "../modules/OwnerManager"
+import SpeciesManager from "../modules/SpeciesManager"
 
 
 export default class ApplicationViews extends Component {
@@ -14,7 +19,7 @@ export default class ApplicationViews extends Component {
         locations: [],
         animals: [],
         employees: [],
-        owners:[],
+        owners: [],
         species: [],
 
     }
@@ -23,77 +28,57 @@ export default class ApplicationViews extends Component {
     componentDidMount() {
         const newState = {}
 
-        fetch("http://localhost:5002/animals")
-            .then(r => r.json())
+        AnimalAPIManager.getAllAnimals()
             .then(animals => newState.animals = animals)
-            .then(() => fetch("http://localhost:5002/employees")
-            .then(r => r.json()))
+        EmployeeAPIManager.getAllEmployees()
             .then(employees => newState.employees = employees)
-            .then(() => fetch("http://localhost:5002/locations")
-            .then(r => r.json()))
+        LocationAPIManager.getAllLocations()
             .then(locations => newState.locations = locations)
-            .then(() => fetch("http://localhost:5002/owners")
-            .then(r => r.json()))
+        OwnerAPIManager.getAllOwners()
             .then(owners => newState.owners = owners)
-            .then(() => fetch("http://localhost:5002/species")
-            .then(r => r.json()))
+        SpeciesManager.getAllSpecies()
             .then(species => newState.species = species)
             .then(() => this.setState(newState))
 
-            // create an array for pets with info?
-
-
+        // create an array for pets with info?
     }
 
-    deleteAnimal = id => {
-        return fetch(`http://localhost:5002/animals/${id}`, {
-            method: "DELETE"
-        })
-        .then(e => e.json())
-        .then(() => fetch(`http://localhost:5002/animals`))
-        .then(e => e.json())
-        .then(animals => this.setState({
-            animals: animals
-        })
-      )
+
+    delete = {
+        deleteAnimal: (id) => {
+            AnimalAPIManager.deleteAnimal(id)
+                .then(animals => this.setState({
+                    animals: animals
+                })
+                )
+        },
+        deleteLocation: (id) => {
+            LocationAPIManager.deleteLocation(id)
+                .then(locations => this.setState({
+                    locations: locations
+                })
+                )
+        },
+        deleteOwner: (id) => {
+            OwnerAPIManager.deleteOwner(id)
+                .then(owners => this.setState({
+                    owners: owners
+                })
+                )
+        },
+        deleteEmployee: (id) => {
+            EmployeeAPIManager.deleteEmployee(id)
+                .then(employees => this.setState({
+                    employees: employees
+                })
+                )
+        }
     }
 
-    deleteLocation = id => {
-        return fetch(`http://localhost:5002/locations/${id}`, {
-            method: "DELETE"
-        })
-        .then(e => e.json())
-        .then(() => fetch(`http://localhost:5002/locations`))
-        .then(e => e.json())
-        .then(locations => this.setState({
-            locations: locations
-        })
-      )
-    }
-    deleteOwner = id => {
-        return fetch(`http://localhost:5002/owners/${id}`, {
-            method: "DELETE"
-        })
-        .then(e => e.json())
-        .then(() => fetch(`http://localhost:5002/owners`))
-        .then(e => e.json())
-        .then(owners => this.setState({
-            owners: owners
-        })
-      )
-    }
-    deleteEmployee = id => {
-        return fetch(`http://localhost:5002/employees/${id}`, {
-            method: "DELETE"
-        })
-        .then(e => e.json())
-        .then(() => fetch(`http://localhost:5002/employees`))
-        .then(e => e.json())
-        .then(employees => this.setState({
-            employees: employees
-        })
-      )
-    }
+
+
+
+
 
 
 
@@ -102,19 +87,19 @@ export default class ApplicationViews extends Component {
         return (
             <React.Fragment >
                 <Route exact path="/" render={(props) => {
-                    return <LocationList locations={this.state.locations} deleteLocation = {this.deleteLocation}/>
+                    return <LocationList locations={this.state.locations} deleteLocation={this.delete.deleteLocation} />
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} species ={this.state.species} owners = {this.state.owners} deleteAnimal={this.deleteAnimal} />
+                    return <AnimalList animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
                 }} />
                 <Route path="/employees" render={(props) => {
-                    return <EmployeeList employees={this.state.employees} />
+                    return <EmployeeList employees={this.state.employees} deleteEmployee={this.delete.deleteEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} pets={this.state.pets} animals ={this.state.animals} deleteOwner={this.deleteOwner}/>
+                    return <OwnerList owners={this.state.owners} pets={this.state.pets} animals={this.state.animals} deleteOwner={this.delete.deleteOwner} />
                 }} />
-                <Route path="/search" render={(props) =>{
-                    return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo}/>
+                <Route path="/search" render={(props) => {
+                    return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo} />
                 }} />
 
             </React.Fragment >
