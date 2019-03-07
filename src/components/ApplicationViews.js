@@ -41,6 +41,8 @@ export default class ApplicationViews extends Component {
             .then(() => this.setState(newState))
 
             // create an array for pets with info?
+
+
     }
 
     deleteAnimal = id => {

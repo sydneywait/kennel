@@ -32,27 +32,33 @@
     "animals": [
         {
             "id": 1,
-            "name": "cat"
+            "name": "cat",
+            "image":"/images/cat.png"
         },
         {
             "id": 2,
-            "name": "dog"
+            "name": "dog",
+            "image":"/images/dog.png"
         },
         {
             "id": 3,
-            "name": "chicken"
+            "name": "chicken",
+            "image":"/images/chicken.png"
         },
         {
             "id": 4,
-            "name": "hamster"
+            "name": "hamster",
+            "image":"/images/hamster.png"
         },
         {
             "id": 5,
-            "name": "horse"
+            "name": "horse",
+            "image":"/images/horse.png"
         },
         {
             "id": 6,
-            "name": "snake"
+            "name": "snake",
+            "image":"/images/snake.png"
         }
     ],
     "owners": [
