@@ -15,8 +15,8 @@ export default class ApplicationViews extends Component {
         animals: [],
         employees: [],
         owners:[],
-        pets: [],
-        petsWithInfo:[]
+        species: [],
+
     }
 
 
@@ -35,9 +35,9 @@ export default class ApplicationViews extends Component {
             .then(() => fetch("http://localhost:5002/owners")
             .then(r => r.json()))
             .then(owners => newState.owners = owners)
-            .then(() => fetch("http://localhost:5002/pets")
+            .then(() => fetch("http://localhost:5002/species")
             .then(r => r.json()))
-            .then(pets => newState.pets = pets)
+            .then(species => newState.species = species)
             .then(() => this.setState(newState))
 
             // create an array for pets with info?
@@ -105,7 +105,7 @@ export default class ApplicationViews extends Component {
                     return <LocationList locations={this.state.locations} deleteLocation = {this.deleteLocation}/>
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} deleteAnimal={this.deleteAnimal} />
+                    return <AnimalList animals={this.state.animals} species ={this.state.species} owners = {this.state.owners} deleteAnimal={this.deleteAnimal} />
                 }} />
                 <Route path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} />

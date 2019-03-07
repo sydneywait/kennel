@@ -1,9 +1,10 @@
 .animals {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
-.icon--dog {
+.icon--animal {
     width: 50px;
     height: 50px;
 }
@@ -22,4 +23,8 @@
 .card-link {
     margin: 12px 0 0 0;
     font-size: 0.7em;
+}
+
+.ownerName {
+    font-size: 0.6em;
 }
