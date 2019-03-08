@@ -1,7 +1,7 @@
 export default {
 
     getAllAnimals: () => {
-        return fetch("http://localhost:5002/animals")
+        return fetch("http://localhost:5002/animals/?_expand=species&_expand=owner")
             .then(r => r.json())
     },
     getSingleAnimal: (id) => {

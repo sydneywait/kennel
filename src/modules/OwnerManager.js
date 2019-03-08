@@ -1,7 +1,7 @@
 export default {
-    getAllOwners: ()=>{
-    return fetch("http://localhost:5002/owners")
-        .then(r => r.json())
+    getAllOwners: () => {
+        return fetch("http://localhost:5002/owners")
+            .then(r => r.json())
     },
 
     getSingleOwner: (id) => {
@@ -16,20 +16,41 @@ export default {
             .then(() => fetch(`http://localhost:5002/owners`))
             .then(e => e.json())
     },
-    editOwner: (id) => {
+    editOwner: (object, id) => {
         return fetch(`http://localhost:5002/owners/${id}`, {
-            method: "PATCH"
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(object)
         })
             .then(e => e.json())
             .then(() => fetch(`http://localhost:5002/owners`))
             .then(e => e.json())
     },
-    addOwner: (id) => {
-        return fetch(`http://localhost:5002/owners/${id}`, {
-            method: "POST"
+    addOwner: (object) => {
+        return fetch("http://localhost:5002/owners", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(object)
         })
             .then(e => e.json())
             .then(() => fetch(`http://localhost:5002/owners`))
             .then(e => e.json())
     },
+
+    patchOwner: (patchItem, id) => {
+        return fetch(`http://localhost:5002/owners/${id}`, {
+    method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(patchItem)
+        })
+            .then(e => e.json())
+            .then(() => fetch(`http://localhost:5002/owners`))
+            .then(e => e.json())
+    }
 }

@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom'
 import React, { Component } from "react"
 import AnimalList from './animal/AnimalList'
+import AnimalResults from './animal/AnimalResults'
 import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owner/OwnerList'
@@ -75,13 +76,68 @@ export default class ApplicationViews extends Component {
         }
     }
 
+    patch = {
+        // patchAnimal: (id) => {
+        //     AnimalAPIManager.patchAnimal(id)
+        //         .then(animals => this.setState({
+        //             animals: animals
+        //         })
+        //         )
+        // },
+        // patchLocation: (id) => {
+        //     LocationAPIManager.patchLocation(id)
+        //         .then(locations => this.setState({
+        //             locations: locations
+        //         })
+        //         )
+        // },
+        patchOwner: (patchObject, id) => {
+            OwnerAPIManager.patchOwner(patchObject, id)
+                .then(owners => this.setState({
+                    owners: owners
+                })
+                )
+        }
+        // patchEmployee: (id) => {
+        //     EmployeeAPIManager.patchEmployee(id)
+        //         .then(employees => this.setState({
+        //             employees: employees
+        //         })
+        //         )
+        // }
+    }
 
+    // edit ={
+    //     editAnimal: (id) => {
+    //         AnimalAPIManager.editAnimal(id)
+    //             .then(animals => this.setState({
+    //                 animals: animals
+    //             })
+    //             )
+    //     },
+    //     editLocation: (id) => {
+    //         LocationAPIManager.editLocation(id)
+    //             .then(locations => this.setState({
+    //                 locations: locations
+    //             })
+    //             )
+    //     },
+    //     editOwner: (id) => {
+    //         OwnerAPIManager.editOwner(id)
+    //             .then(owners => this.setState({
+    //                 owners: owners
+    //             })
+    //             )
+    //     },
+    //     editEmployee: (id) => {
+    //         EmployeeAPIManager.editEmployee(id)
+    //             .then(employees => this.setState({
+    //                 employees: employees
+    //             })
+    //             )
+    //     }
 
-
-
-
-
-
+    // }
 
     render() {
         return (
@@ -90,16 +146,24 @@ export default class ApplicationViews extends Component {
                     return <LocationList locations={this.state.locations} deleteLocation={this.delete.deleteLocation} />
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
+                    return <AnimalList {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
                 }} />
                 <Route path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} deleteEmployee={this.delete.deleteEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} pets={this.state.pets} animals={this.state.animals} deleteOwner={this.delete.deleteOwner} />
+                    return <OwnerList owners={this.state.owners}
+                    pets={this.state.pets}
+                    animals={this.state.animals}
+                    deleteOwner={this.delete.deleteOwner}
+                    patchOwner ={this.patch.patchOwner
+                    } />
                 }} />
                 <Route path="/search" render={(props) => {
                     return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo} />
+                }} />
+                 <Route path="/sortanimal" render={(props) => {
+                    return <AnimalResults {...props} deleteAnimal={this.delete.deleteAnimal} animals={this.state.animals} species={this.state.species} owners={this.state.owners}/>
                 }} />
 
             </React.Fragment >

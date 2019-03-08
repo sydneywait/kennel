@@ -1,7 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
-// import Animal from "./Animal";
-// import Employee from "./Employee";
+
 
 
 export default class SearchResults extends Component {

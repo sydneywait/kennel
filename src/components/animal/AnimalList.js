@@ -9,16 +9,25 @@ export default class AnimalList extends Component {
                 {
                     this.props.animals.map((animal) => {
                         const species = this.props.species.find(species => species.id === parseInt(animal.speciesId)).name
-                        const speciesLink = this.props.species.find(species => species.id === parseInt(animal.speciesId)).image
-                        const owner = this.props.owners.find(owner => owner.id===parseInt(animal.ownerId)).name
+                        const activeK=this.props.location.state.activeK
 
+                        if(species ===activeK){
+                            console.log("match", species, activeK)
+                        }
+                        else{
+                            console.log("no match", species, activeK)
+                        }
+
+                        const speciesLink = this.props.species.find(species => species.id === parseInt(animal.speciesId)).image
+                        const owner = this.props.owners.find(owner => owner.id === parseInt(animal.ownerId)).name
+                        console.log(this.props.location.state.activeK)
                         console.log(species, speciesLink, owner)
                         return <div key={animal.id} className="card">
                             <div className="card-body">
                                 <h5 className="card-title">
                                     <img src={window.location.origin + speciesLink} className="icon--animal" alt="error" />
                                     <p>{animal.name}</p>
-                                    <p class = "ownerName">Owner: {owner}</p>
+                                    <p className="ownerName">Owner: {owner}</p>
                                     <a href="#"
                                         onClick={() => this.props.deleteAnimal(animal.id)}
                                         className="card-link">Delete</a>
