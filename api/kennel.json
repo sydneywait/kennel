@@ -141,7 +141,7 @@
       "phone": "304-123-4567",
       "image": "/images/people/girl.png",
       "goldMembership": true,
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 3,
@@ -149,7 +149,7 @@
       "phone": "304-123-4567",
       "image": "/images/people/primLady.png",
       "goldMembership": true,
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 4,

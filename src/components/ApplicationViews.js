@@ -151,7 +151,9 @@ export default class ApplicationViews extends Component {
                     return <EmployeeList employees={this.state.employees} deleteEmployee={this.delete.deleteEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners}
+                    return <OwnerList
+                    {...props}
+                    owners={this.state.owners}
                     pets={this.state.pets}
                     animals={this.state.animals}
                     deleteOwner={this.delete.deleteOwner}

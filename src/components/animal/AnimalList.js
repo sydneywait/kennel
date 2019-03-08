@@ -34,7 +34,6 @@ export default class AnimalList extends Component {
                                         <p className="ownerName">Owner: {owner}</p>
                                         <a href="#"
                                             onClick={() => this.props.deleteAnimal(animal.id)}
-
                                             className="card-link">Delete</a>
                                     </h5>
                                 </div>

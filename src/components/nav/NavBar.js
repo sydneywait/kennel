@@ -17,12 +17,15 @@ export default class NavBar extends Component {
         </Nav.Item>
         <Nav.Item>
           <Link className="nav-link"  to="/employees">Employees</Link>
-
         </Nav.Item>
         <Nav.Item>
-          <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}></NavDropdown>
-          <Link className="nav-link"  to="/owners">Owners</Link>
+          <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}>
+          <NavDropdown.Item eventKey="all">All Owners</NavDropdown.Item>
+          <NavDropdown.Item eventKey="active">Active Owners</NavDropdown.Item>
+          <NavDropdown.Item eventKey="inactive">Inactive Owners</NavDropdown.Item>
+          </NavDropdown>
         </Nav.Item>
+        <Nav.Item>
         <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
           {/* <Link className="nav-link" to="/animals">All Animals</Link> */}
           <NavDropdown.Item eventKey="all-0">All Animals</NavDropdown.Item>
@@ -33,6 +36,7 @@ export default class NavBar extends Component {
           <NavDropdown.Item eventKey="horse-5">horses</NavDropdown.Item>
           <NavDropdown.Item eventKey="snake-6">snakes</NavDropdown.Item>
         </NavDropdown>
+        </Nav.Item>
         <Nav.Item className="nav-item">
           <input id="searchTerms"
             type="search"
@@ -46,47 +50,7 @@ export default class NavBar extends Component {
   }
 
 
-  // render() {
-  //     return (
-  //         <nav className="navbar navbar-light fixed-top light-blue flex-md-nowrap p-0 shadow">
-  //             <ul className="nav nav-pills">
-  //                 <li className="nav-item">
-  //                     <Link className="nav-link" to="/">Locations</Link>
-  //                 </li>
-  //                 <li className="nav-item dropdown">
-  //                     <Link className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" to="/animals">Animals</Link>
-  //                     {/* <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> */}
-  //                     <div className="dropdown-menu">
-  //                         <a className="dropdown-item" href="#">dog</a>
-  //                         <a className="dropdown-item" href="#">cat</a>
-  //                         <a className="dropdown-item" href="#">chicken</a>
-  //                         <div className="dropdown-divider"></div>
-  //                         <a className="dropdown-item" href="#">Separated link</a>
-  //                         </div>
-  //                 </li>
 
-
-  //                 <li className="nav-item">
-  //                     <Link className="nav-link" to="/employees">Employees</Link>
-  //                 </li>
-  //                 <li className="nav-item">
-  //                     <Link className="nav-link" to="/owners">Owners</Link>
-  //                 </li>
-  //                 <li className="nav-item">
-  //                     <input id="searchTerms"
-  //                         type="search"
-  //                         className="form-control"
-  //                         placeholder="search term"
-  //                         onKeyPress={this.handleKeyPress}
-  //                         onChange={this.handleFieldChange} />
-
-
-
-  //                 </li>
-  //             </ul>
-  //         </nav>
-  //     )
-  // }
 
   handleFieldChange = (evt) => {
     const stateToChange = {}
@@ -96,7 +60,6 @@ export default class NavBar extends Component {
 
 
   handleAnimalSelect = (k) => {
-    // if(k==="all"){
       const activeK =k.split("-")
       const activeKName= {"activeK": activeK}
 console.log("active key", activeKName)
@@ -106,30 +69,20 @@ this.setState({ searchTerms: "" })
           state: activeKName
 
         })
-    // }
-    // else{
-    // // console.log('k', k)
-    // const target = k.split("-")
-    // const speciesId = target[1]
-    // console.log(speciesId)
 
-    // const sortItems = {}
-    // fetch(`http://localhost:5002/animals/?speciesId=${speciesId}&_expand=species&_expand=owner
-    // `)
-    //   .then(r => r.json())
-    //   .then(animals => {
-    //     sortItems.animals = animals
-    //     console.log('animals', animals)
-
-  //       this.setState({ searchTerms: "" })
-  //       this.props.history.push({
-  //         pathname: "/animals",
-  //         state: sortItems
-  //       })
-  //     })
-  // }
 }
 
+handleOwnerSelect = (k) => {
+  const activeK = {"activeK": k}
+console.log("active key", activeK)
+this.setState({ searchTerms: "" })
+    this.props.history.push({
+      pathname: "/owners",
+      state: activeK
+
+    })
+
+}
   handleKeyPress = (evt) => {
     if (evt.key === 'Enter') {
       const searchTerm = evt.target.value
