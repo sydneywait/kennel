@@ -92,12 +92,6 @@
       "name": "Steve",
       "ownerId": "2",
       "speciesId": "6"
-    },
-    {
-      "id": 10,
-      "name": "Charlie",
-      "ownerId": "2",
-      "speciesId": "5"
     }
   ],
   "species": [

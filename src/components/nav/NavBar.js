@@ -20,11 +20,12 @@ export default class NavBar extends Component {
 
         </Nav.Item>
         <Nav.Item>
+          <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}></NavDropdown>
           <Link className="nav-link"  to="/owners">Owners</Link>
         </Nav.Item>
-        <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleSelect(k)}>
+        <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
           {/* <Link className="nav-link" to="/animals">All Animals</Link> */}
-          <NavDropdown.Item eventKey="all">All Animals</NavDropdown.Item>
+          <NavDropdown.Item eventKey="all-0">All Animals</NavDropdown.Item>
           <NavDropdown.Item eventKey="cat-1">cats</NavDropdown.Item>
           <NavDropdown.Item eventKey="dog-2">dogs</NavDropdown.Item>
           <NavDropdown.Item eventKey="chicken-3">chickens</NavDropdown.Item>
@@ -92,38 +93,41 @@ export default class NavBar extends Component {
     stateToChange[evt.target.id] = evt.target.value
     this.setState(stateToChange)
   }
-  handleSelect = (k) => {
-    if(k==="all"){
-      const activeKeyName= {"activeK": k}
-console.log("active key", activeKeyName)
+
+
+  handleAnimalSelect = (k) => {
+    // if(k==="all"){
+      const activeK =k.split("-")
+      const activeKName= {"activeK": activeK}
+console.log("active key", activeKName)
 this.setState({ searchTerms: "" })
         this.props.history.push({
           pathname: "/animals",
-          state: activeKeyName
+          state: activeKName
 
         })
-    }
-    else{
-    // console.log('k', k)
-    const target = k.split("-")
-    const speciesId = target[1]
+    // }
+    // else{
+    // // console.log('k', k)
+    // const target = k.split("-")
+    // const speciesId = target[1]
     // console.log(speciesId)
 
-    const sortItems = {}
-    fetch(`http://localhost:5002/animals/?speciesId=${speciesId}&_expand=species&_expand=owner
-    `)
-      .then(r => r.json())
-      .then(animals => {
-        sortItems.animals = animals
-        console.log('animals', animals)
+    // const sortItems = {}
+    // fetch(`http://localhost:5002/animals/?speciesId=${speciesId}&_expand=species&_expand=owner
+    // `)
+    //   .then(r => r.json())
+    //   .then(animals => {
+    //     sortItems.animals = animals
+    //     console.log('animals', animals)
 
-        this.setState({ searchTerms: "" })
-        this.props.history.push({
-          pathname: "/sortAnimal",
-          state: sortItems
-        })
-      })
-  }
+  //       this.setState({ searchTerms: "" })
+  //       this.props.history.push({
+  //         pathname: "/animals",
+  //         state: sortItems
+  //       })
+  //     })
+  // }
 }
 
   handleKeyPress = (evt) => {

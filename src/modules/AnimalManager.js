@@ -13,7 +13,7 @@ export default {
             method: "DELETE"
         })
             .then(e => e.json())
-            .then(() => fetch(`http://localhost:5002/animals`))
+            .then(() => fetch(`http://localhost:5002/animals/?_expand=species&_expand=owner`))
             .then(e => e.json())
     }
 }

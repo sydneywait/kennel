@@ -1,7 +1,6 @@
 import { Route } from 'react-router-dom'
 import React, { Component } from "react"
 import AnimalList from './animal/AnimalList'
-import AnimalResults from './animal/AnimalResults'
 import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnerList from './owner/OwnerList'
@@ -162,9 +161,7 @@ export default class ApplicationViews extends Component {
                 <Route path="/search" render={(props) => {
                     return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo} />
                 }} />
-                 <Route path="/sortanimal" render={(props) => {
-                    return <AnimalResults {...props} deleteAnimal={this.delete.deleteAnimal} animals={this.state.animals} species={this.state.species} owners={this.state.owners}/>
-                }} />
+
 
             </React.Fragment >
         )
