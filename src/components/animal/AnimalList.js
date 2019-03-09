@@ -2,24 +2,64 @@ import React, { Component } from 'react'
 import "./Animal.css"
 
 export default class AnimalList extends Component {
+    state = {
+        activeK: []
+    }
+
+    // handleChange(activeKey) {this.setState({ activeK: activeKey });}
+
+
+
+    componentDidMount() {
+        const newState = []
+        if (typeof (this.props.location.state) !== "undefined") {
+            let activeK = this.props.location.state.activeK
+            newState.activeK = activeK
+            this.setState(newState)
+
+            console.log("state did mount", this.state)
+        }
+    }
+    componentWillReceiveProps(prevProps) {
+        const newState = []
+        console.log("prevProps", prevProps)
+        if (typeof (this.props.location.state) !== "undefined" && typeof (prevProps.location.state) !== "undefined") {
+            let active = this.props.location.state.activeK
+            let prev = prevProps.location.state.activeK
+            console.log("compare", active, prev)
+            if (active !== prev) {
+                newState.activeK = prev
+                this.setState(newState)
+                console.log("state did update**", this.state)
+            }
+        }
+        else if (typeof (this.props.location.state) !== "undefined" && typeof (prevProps.location.state) === "undefined") {
+            console.log("prev undefinded, here's active", this.props.location.state.activeK)
+            let active = this.props.location.state.activeK
+            newState.activeK = active
+            this.setState(newState)
+            console.log("prevProps", prevProps)
+            console.log("current props", this.props)
+            console.log("state did update after delete**", this.state)
+
+            //why isn't it refreshing the state before render???
+
+        }
+    }
     render() {
-        // console.log(this.props.animals)
+        let activeK = ["all", "0"]
+        console.log("what is the state", this.state)
+        console.log("what are the props", this.props.location)
 
         return (
             <section className="animals">
                 {
                     this.props.animals.map((animal) => {
-                        let activeK = ["all", "0"]
+                        // console.log("state", this.state)
+
 
                         const species = animal.species.name
-
-                        if (typeof (this.props.location.state) !== "undefined") {
-                            activeK = this.props.location.state.activeK
-
-                        }
-                        else{
-                            activeK=["all", "0"]
-                        }
+                        activeK = this.state.activeK
 
                         if (species === activeK[0] || activeK[0] === "all") {
 
@@ -41,7 +81,7 @@ export default class AnimalList extends Component {
                         }
 
                         else {
-                            console.log("no match", species, activeK[0])
+                            // console.log("no match", species, activeK[0])
                         }
                     })
 

@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import "./Owner.css"
 
 export default class OwnerList extends Component {
+    state = {
+        activeK: ""
+    }
 
     displayActive = (archive, ownerId) => {
         return (
@@ -18,7 +21,7 @@ export default class OwnerList extends Component {
             <React.Fragment>
                 <a href="#"
                     onClick={() => this.props.patchOwner(activate, ownerId)}
-                    className="card-link client">Activate</a>
+                    className="card-link client">Reinstate</a>
             </React.Fragment>
         )
     }
@@ -41,10 +44,11 @@ export default class OwnerList extends Component {
 
                         if (typeof (this.props.location.state) !== "undefined") {
                             activeK = this.props.location.state.activeK
+                            this.setState.activeK=activeK
 
                         }
                         else {
-                            activeK = "all"
+                            this.setState.activeK = "all"
                         }
 
                         return <div key={owner.id} className="card">
