@@ -5,9 +5,10 @@ import Form from "react-bootstrap/Form"
 
 export default class AnimalList extends Component {
     state = {
-        selected: ""
+        selected: "all",
+        active:"true"
     }
-    createDropdownSort() {
+    createDropdownSpeciesSort() {
         return (
             <React.Fragment>
 
@@ -20,6 +21,22 @@ export default class AnimalList extends Component {
                         <option>hamster</option>
                         <option>horse</option>
                         <option>snake</option>
+                    </Form.Control>
+                </Form.Group>
+
+            </React.Fragment>
+        )
+
+    }
+    createDropdownActiveSort() {
+        return (
+            <React.Fragment>
+
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Control as="select" onChange={this.handleSelect2}>
+                        <option selected="selected">all</option>
+                        <option value ="true">active</option>
+                        <option value = "false">inactive</option>
                     </Form.Control>
                 </Form.Group>
 
@@ -52,17 +69,25 @@ export default class AnimalList extends Component {
         newState.selected = evt.target.value
         this.setState(newState)
     }
+    handleSelect2 = (evt) => {
+        const newState = {}
+        newState.active = evt.target.value
+        this.setState(newState)
+    }
 
     render() {
                 return (
 
             <section className="animals">
-                <div>{this.createDropdownSort()}</div>
+                <div>{this.createDropdownSpeciesSort()}</div>
+                <div>{this.createDropdownActiveSort()}</div>
                 {
 
                     this.props.animals.map((animal) => {
                         console.log(animal)
-                        if (animal.species.name === this.state.selected || this.state.selected === "all" || this.state.selected === "") {
+                        const status = animal.owner.isActive.toString()
+                        const species = animal.species.name
+                        if (species === this.state.selected && status===this.state.active || this.state.selected === "all" || this.state.selected === "") {
 
                             return <div>{this.createAnimalCard(animal)}
                             </div>
