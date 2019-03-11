@@ -27,4 +27,10 @@
 
 .ownerName {
     font-size: 0.6em;
+    text-align: center;
+}
+
+.del-btn {
+    /* text-align: center;
+    justify-content: center; */
 }

@@ -19,15 +19,16 @@ export default class NavBar extends Component {
           <Link className="nav-link"  to="/employees">Employees</Link>
         </Nav.Item>
         <Nav.Item>
-          <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}>
+        <Link className="nav-link" to="/owners">Owners</Link>
+          {/* <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}>
           <NavDropdown.Item eventKey="all">All Owners</NavDropdown.Item>
           <NavDropdown.Item eventKey="active">Active Owners</NavDropdown.Item>
           <NavDropdown.Item eventKey="inactive">Inactive Owners</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
         </Nav.Item>
         <Nav.Item>
-        <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
-          {/* <Link className="nav-link" to="/animals">All Animals</Link> */}
+        <Link className="nav-link" to="/animals">Animals</Link>
+        {/* <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
           <NavDropdown.Item eventKey="all-0">All Animals</NavDropdown.Item>
           <NavDropdown.Item eventKey="cat-1">cats</NavDropdown.Item>
           <NavDropdown.Item eventKey="dog-2">dogs</NavDropdown.Item>
@@ -35,7 +36,7 @@ export default class NavBar extends Component {
           <NavDropdown.Item eventKey="hamster-4">hamsters</NavDropdown.Item>
           <NavDropdown.Item eventKey="horse-5">horses</NavDropdown.Item>
           <NavDropdown.Item eventKey="snake-6">snakes</NavDropdown.Item>
-        </NavDropdown>
+        </NavDropdown> */}
         </Nav.Item>
         <Nav.Item className="nav-item">
           <input id="searchTerms"
