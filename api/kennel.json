@@ -1,6 +1,21 @@
 {
   "employees": [
     {
+      "id": 1,
+      "name": "Jessica Younker",
+      "image": "/images/people/farmerLady.png"
+    },
+    {
+      "id": 2,
+      "name": "Jordan Nelson",
+      "image": "/images/people/maleEmployee.png"
+    },
+    {
+      "id": 3,
+      "name": "Zoe LeBlanc",
+      "image": "/images/people/vestLady.png"
+    },
+    {
       "id": 4,
       "name": "Blaise Roberts",
       "image": "/images/people/beardPerson.png"
@@ -9,47 +24,38 @@
   "locations": [
     {
       "id": 1,
-      "name": "Nashville North",
-      "address": "10101 Binary Court"
+      "name": "Nashville East",
+      "address": "10101 Binary Court",
+      "image": "/images/locations/east.jpg"
     },
     {
       "id": 2,
-      "name": "Nashville South",
-      "address": "10101 Binary Court"
+      "name": "Nashville North",
+      "address": "10101 Binary Court",
+      "image": "/images/locations/north.jpg"
     },
     {
       "id": 3,
-      "name": "Nashville East",
-      "address": "10101 Binary Court"
+      "name": "Nashville West",
+      "address": "10101 Binary Court",
+      "image": "/images/locations/west.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Nashville South",
+      "address": "10101 Binary Court",
+      "image": "/images/locations/south.jpg"
     }
   ],
   "animals": [
     {
-      "id": 12,
-      "name": "Henny",
-      "ownerId": "2",
-      "speciesId": "3"
-    },
-    {
-      "id": 16,
-      "name": "Max",
-      "ownerId": "2",
-      "speciesId": "2"
-    },
-    {
-      "id": 17,
+      "id": 7,
       "name": "Spot",
       "ownerId": "1",
       "speciesId": "2"
     },
     {
-      "id": 18,
-      "name": "Sam",
-      "ownerId": "2",
-      "speciesId": "4"
-    },
-    {
-      "id": 19,
+      "id": 9,
       "name": "Steve",
       "ownerId": "2",
       "speciesId": "6"
@@ -94,7 +100,7 @@
       "phone": "304-123-4567",
       "image": "/images/people/boy.png",
       "goldMembership": true,
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 2,
@@ -102,7 +108,7 @@
       "phone": "304-123-4567",
       "image": "/images/people/girl.png",
       "goldMembership": true,
-      "isActive": false
+      "isActive": true
     },
     {
       "id": 3,
@@ -134,7 +140,7 @@
       "phone": "304-123-4567",
       "image": "/images/people/oldLady.png",
       "goldMembership": false,
-      "isActive": true
+      "isActive": false
     }
   ]
 }

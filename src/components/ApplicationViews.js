@@ -12,7 +12,8 @@ import OwnerAPIManager from "../modules/OwnerManager"
 import SpeciesManager from "../modules/SpeciesManager"
 import AnimalDetail from './animal/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
-
+import OwnerDetail from './owner/OwnerDetail'
+import LocationDetail from './location/LocationDetail'
 
 export default class ApplicationViews extends Component {
 
@@ -94,7 +95,7 @@ export default class ApplicationViews extends Component {
         //         )
         // },
         patchOwner: (patchObject, id) => {
-            OwnerAPIManager.patchOwner(patchObject, id)
+            return OwnerAPIManager.patchOwner(patchObject, id)
                 .then(owners => this.setState({
                     owners: owners
                 })
@@ -147,8 +148,11 @@ export default class ApplicationViews extends Component {
                 <Route exact path="/" render={(props) => {
                     return <LocationList {...props} locations={this.state.locations} deleteLocation={this.delete.deleteLocation} />
                 }} />
+                <Route path="/locations/:locationId(\d+)" render={(props) => {
+                    return <LocationDetail {...props} locations={this.state.locations} deleteLocation={this.delete.deleteLocation} />
+                }} />
                 <Route exact path="/animals" render={(props) => {
-                    return <AnimalList {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} />
+                    return <AnimalList {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
                 }} />
                 <Route path="/animals/:animalId(\d+)" render={(props) => {
                     return <AnimalDetail {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
@@ -168,6 +172,9 @@ export default class ApplicationViews extends Component {
                         deleteOwner={this.delete.deleteOwner}
                         patchOwner={this.patch.patchOwner
                         } />
+                }} />
+                <Route path="/owners/:ownerId(\d+)" render={(props) => {
+                    return <OwnerDetail {...props} owners={this.state.owners} deleteOwner={this.delete.deleteOwner} patchOwner={this.patch.patchOwner} />
                 }} />
                 <Route path="/search" render={(props) => {
                     return <SearchResults {...props} petsWithInfo={this.state.petsWithInfo} />

@@ -1,30 +1,14 @@
 import React, { Component } from 'react'
 import "./Owner.css"
-
+import { Link } from "react-router-dom";
 export default class OwnerList extends Component {
     state = {
         activeK: ""
     }
 
-    displayActive = (archive, ownerId) => {
-        return (
-            <React.Fragment>
-                <a href="#"
-                    onClick={() => this.props.patchOwner(archive, ownerId)}
-                    className="card-link client">Delete</a>
-            </React.Fragment>
-        )
-    }
 
-    displayInActive = (activate, ownerId) => {
-        return (
-            <React.Fragment>
-                <a href="#"
-                    onClick={() => this.props.patchOwner(activate, ownerId)}
-                    className="card-link client">Reinstate</a>
-            </React.Fragment>
-        )
-    }
+
+
 
     render() {
         return (
@@ -39,8 +23,7 @@ export default class OwnerList extends Component {
                         else {
                             memberClass = "card-body"
                         }
-                        let archive = { "isActive": false }
-                        let activate = { "isActive": true }
+
 
                         if (typeof (this.props.location.state) !== "undefined") {
                             activeK = this.props.location.state.activeK
@@ -56,9 +39,9 @@ export default class OwnerList extends Component {
                                 <h5 className="card-title">
                                     <img src={window.location.origin + owner.image} className="icon--owner" />
                                     <p>{owner.name}</p>
-                                    {owner.phone}
-                                    {owner.isActive ? this.displayActive(archive, owner.id) : this.displayInActive(activate, owner.id)}
-                                </h5>
+                                    <Link className="nav-link" to={`/owners/${owner.id}`}>Details</Link>
+
+                                                                    </h5>
                             </div>
                         </div>
                     }
