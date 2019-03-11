@@ -1,94 +1,77 @@
 import React, { Component } from 'react'
 import "./Animal.css"
 import { Link } from "react-router-dom";
+import Form from "react-bootstrap/Form"
 
 export default class AnimalList extends Component {
-    // state = {
-    //     activeK: []
-    // }
-
-    // handleChange(activeKey) {this.setState({ activeK: activeKey });}
-
-
-
-    // componentDidMount() {
-    //     const newState = []
-    //     if (typeof (this.props.location.state) !== "undefined") {
-    //         let activeK = this.props.location.state.activeK
-    //         newState.activeK = activeK
-    //         this.setState(newState)
-
-    //         console.log("state did mount", this.state)
-    //     }
-    // }
-    // componentWillReceiveProps(prevProps) {
-    //     const newState = []
-    //     console.log("prevProps", prevProps)
-    //     if (typeof (this.props.location.state) !== "undefined" && typeof (prevProps.location.state) !== "undefined") {
-    //         let active = this.props.location.state.activeK
-    //         let prev = prevProps.location.state.activeK
-    //         console.log("compare", active, prev)
-    //         if (active !== prev) {
-    //             newState.activeK = prev
-    //             this.setState(newState)
-    //             console.log("state did update**", this.state)
-    //         }
-    //     }
-    //     else if (typeof (this.props.location.state) !== "undefined" && typeof (prevProps.location.state) === "undefined") {
-    //         console.log("prev undefinded, here's active", this.props.location.state.activeK)
-    //         let active = this.props.location.state.activeK
-    //         newState.activeK = active
-    //         this.setState(newState)
-    //         console.log("prevProps", prevProps)
-    //         console.log("current props", this.props)
-    //         console.log("state did update after delete**", this.state)
-
-    //         //why isn't it refreshing the state before render???
-
-    //     }
-    // }
-    render() {
-        // let activeK = ["all", "0"]
-        // console.log("what is the state", this.state)
-        // console.log("what are the props", this.props.location)
-
+    state = {
+        selected: ""
+    }
+    createDropdownSort() {
         return (
+            <React.Fragment>
+
+                <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Control as="select" onChange={this.handleSelect}>
+                        <option selected="selected">all</option>
+                        <option>cat</option>
+                        <option>dog</option>
+                        <option>chicken</option>
+                        <option>hamster</option>
+                        <option>horse</option>
+                        <option>snake</option>
+                    </Form.Control>
+                </Form.Group>
+
+            </React.Fragment>
+        )
+
+    }
+
+    createAnimalCard(animal) {
+        return (
+            <React.Fragment>
+
+                <div key={animal.id} className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">
+                            <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
+                            <p>{animal.name}</p>
+                            <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
+                        </h5>
+                    </div>
+                </div>
+
+            </React.Fragment>
+        )
+    }
+
+
+    handleSelect = (evt) => {
+        const newState = {}
+        newState.selected = evt.target.value
+        this.setState(newState)
+    }
+
+    render() {
+                return (
+
             <section className="animals">
+                <div>{this.createDropdownSort()}</div>
                 {
+
                     this.props.animals.map((animal) => {
-                        // console.log("state", this.state)
+                        console.log(animal)
+                        if (animal.species.name === this.state.selected || this.state.selected === "all" || this.state.selected === "") {
 
-
-                        const species = animal.species.name
-                        // activeK = this.state.activeK
-
-                        // if (species === activeK[0] || activeK[0] === "all") {
-
-                            const speciesLink = animal.species.image
-                            const owner = animal.owner.name
-
-                            return <div key={animal.id} className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">
-                                        <img src={window.location.origin + speciesLink} className="icon--animal" alt="error" />
-                                        <p>{animal.name}</p>
-
-                                        <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
-
-
-                                    </h5>
-                                </div>
+                            return <div>{this.createAnimalCard(animal)}
                             </div>
-                        // }
+                        }
+                        else {
 
-                        // else {
-                        //     // console.log("no match", species, activeK[0])
-                        // }
-                    })
+                        }
 
-
-
-                }
+                    })}
             </section>
         )
     }

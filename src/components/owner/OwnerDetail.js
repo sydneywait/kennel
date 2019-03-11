@@ -13,17 +13,42 @@ export default class OwnerDetail extends Component {
                     onClick={() => this.props.patchOwner(archive, ownerId)
                     .then(this.props.history.push("/owners"))}
                     className="card-link client">Delete</a>
+
             </React.Fragment>
         )
     }
 
-    displayInActive = (activate, ownerId) => {
+    displayInactive = (activate, ownerId) => {
         return (
             <React.Fragment>
                 <a href="#"
                     onClick={() => this.props.patchOwner(activate, ownerId)
                         .then(this.props.history.push("/owners"))}
                     className="card-link client">Reinstate</a>
+            </React.Fragment>
+        )
+    }
+
+    downgrade = (downgrade, ownerId) => {
+        return (
+            <React.Fragment>
+                <a href="#"
+                    onClick={() => this.props.patchOwner(downgrade, ownerId)
+                    .then(this.props.history.push("/owners"))}
+                    className="card-link client">downgrade</a>
+
+            </React.Fragment>
+        )
+    }
+
+    upgrade = (upgrade, ownerId) => {
+        return (
+            <React.Fragment>
+                <a href="#"
+                    onClick={() => this.props.patchOwner(upgrade, ownerId)
+                    .then(this.props.history.push("/owners"))}
+                    className="card-link client">upgrade</a>
+
             </React.Fragment>
         )
     }
@@ -46,6 +71,8 @@ export default class OwnerDetail extends Component {
         console.log(this.props)
         let archive = { "isActive": false }
         let activate = { "isActive": true }
+        let upgrade ={ "goldMembership": true }
+        let downgrade={ "goldMembership": false }
         return (
             <section className="owner">
                 <div key={owner.id} className="card">
@@ -57,7 +84,8 @@ export default class OwnerDetail extends Component {
                         <h5 className="card-title">{owner.name}</h5>
                         <p>{owner.phone}</p>
 
-                        {owner.isActive ? this.displayActive(archive, owner.id) : this.displayInActive(activate, owner.id)}
+                        {owner.isActive ? this.displayActive(archive, owner.id) : this.displayInactive(activate, owner.id)}
+                        {owner.goldMembership ? this.downgrade(downgrade, owner.id) : this.upgrade(upgrade, owner.id)}
 
                     </div>
                 </div>

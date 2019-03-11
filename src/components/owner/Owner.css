@@ -34,3 +34,6 @@ p{
 
     text-align: center;
 }
+.inactive{
+    background-color: lightgray;
+}
