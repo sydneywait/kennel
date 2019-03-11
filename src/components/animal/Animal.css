@@ -29,6 +29,9 @@
     font-size: 0.6em;
     text-align: center;
 }
+.inactive{
+    background-color: lightgray;
+}
 
 .del-btn {
     /* text-align: center;

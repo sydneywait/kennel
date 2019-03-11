@@ -12,7 +12,7 @@ export default class OwnerList extends Component {
             <React.Fragment>
                 <Form.Group controlId="exampleForm.ControlSelect2">
                     <Form.Control as="select" onChange={this.handleSelect}>
-                        <option >all</option>
+                        <option defaultValue>all</option>
                         <option value="true">active</option>
                         <option value="false">archived</option>
                     </Form.Control>

@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form"
 export default class AnimalList extends Component {
     state = {
         selected: "all",
-        active:"true"
+        active: "true"
     }
     createDropdownSpeciesSort() {
         return (
@@ -34,9 +34,9 @@ export default class AnimalList extends Component {
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Control as="select" onChange={this.handleSelect2}>
-                        <option selected="selected">all</option>
-                        <option value ="true">active</option>
-                        <option value = "false">inactive</option>
+                        <option value="all">all</option>
+                        <option selected="selected" defaultValue="true">active</option>
+                        <option value="false">inactive</option>
                     </Form.Control>
                 </Form.Group>
 
@@ -46,11 +46,18 @@ export default class AnimalList extends Component {
     }
 
     createAnimalCard(animal) {
+        let cardClass = ""
+        if (animal.owner.isActive === true) {
+            cardClass = "card-body active"
+        }
+        else {
+            cardClass = "card-body inactive"
+        }
         return (
             <React.Fragment>
 
                 <div key={animal.id} className="card">
-                    <div className="card-body">
+                    <div className={cardClass}>
                         <h5 className="card-title">
                             <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
                             <p>{animal.name}</p>
@@ -76,7 +83,7 @@ export default class AnimalList extends Component {
     }
 
     render() {
-                return (
+        return (
 
             <section className="animals">
                 <div>{this.createDropdownSpeciesSort()}</div>
@@ -87,16 +94,29 @@ export default class AnimalList extends Component {
                         console.log(animal)
                         const status = animal.owner.isActive.toString()
                         const species = animal.species.name
-                        if (species === this.state.selected && status===this.state.active || this.state.selected === "all" || this.state.selected === "") {
+                        if (this.state.selected === "all" && status === this.state.active) {
 
                             return <div>{this.createAnimalCard(animal)}
                             </div>
                         }
+                        if (this.state.selected===species && status === this.state.active) {
+
+                            return <div>{this.createAnimalCard(animal)}
+                            </div>
+                        }
+                        if (this.state.selected === "all" && this.state.active === "all") {
+                            return <div>{this.createAnimalCard(animal)}
+                            </div>
+                        }
+                        if(this.state.selected===species && this.state.active==="all")
+                        return <div>{this.createAnimalCard(animal)}
+                            </div>
+
                         else {
 
-                        }
+                }
 
-                    })}
+                })}
             </section>
         )
     }
