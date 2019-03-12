@@ -17,25 +17,27 @@ export default class AnimalDetail extends Component {
         console.log(animal)
         console.log(this.props)
         return (
-            <section className="animal">
-                <div key={animal.id} className="card">
-                    <div className="card-body">
-                        <h4 className="card-title">
-                            <img src={window.location.origin + speciesLink} className="icon--animal" />
-                            {animal.name}
-                        </h4>
-                        <h5 className="card-title">{animal.species.name}</h5>
-                        <p className="ownerName">Owner: {owner}</p>
-                        <a href="#" onClick={() => {
-                            this.props.deleteAnimal(animal.id)
-                            this.props.history.push("/animals")
-                        }}
+
+                <section className="animal">
+                    <div key={animal.id} className="card">
+                        <div className="card-body">
+                            <h4 className="card-title">
+                                <img src={window.location.origin + speciesLink} className="icon--animal" />
+                                {animal.name}
+                            </h4>
+                            <h5 className="card-title">{animal.species.name}</h5>
+                            <p className="ownerName">Owner: {owner}</p>
+                            <a href="#" onClick={() => {
+                                this.props.deleteAnimal(animal.id)
+                                this.props.history.push("/animals")
+                            }}
 
 
-                            className="card-link">Delete</a>
+                                className="card-link">Delete</a>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+
         )
     }
 }

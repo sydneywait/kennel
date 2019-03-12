@@ -44,6 +44,15 @@ export default class AnimalList extends Component {
         )
 
     }
+     // Update state whenever an input field is edited
+     handleFieldChange = evt => {
+         console.log("this is evt", evt)
+         console.log("this is evt.target.id", evt.target.id)
+         console.log("this is evt.target.value", evt.target.value)
+        const stateToChange = {};
+        stateToChange[evt.target.id] = evt.target.value;
+        this.setState(stateToChange);
+    };
 
     createAnimalCard(animal) {
         let cardClass = ""
@@ -84,40 +93,52 @@ export default class AnimalList extends Component {
 
     render() {
         return (
-
-            <section className="animals">
-                <div>{this.createDropdownSpeciesSort()}</div>
-                <div>{this.createDropdownActiveSort()}</div>
-                {
-
-                    this.props.animals.map((animal) => {
-                        console.log(animal)
-                        const status = animal.owner.isActive.toString()
-                        const species = animal.species.name
-                        if (this.state.selected === "all" && status === this.state.active) {
-
-                            return <div>{this.createAnimalCard(animal)}
-                            </div>
+            <React.Fragment>
+                <div className="animalButton">
+                    <button type="button"
+                        className="btn btn-success"
+                        onClick={() => {
+                            this.props.history.push("/animals/new")
                         }
-                        if (this.state.selected===species && status === this.state.active) {
+                        }>
+                        Admit Animal
+                    </button>
+                </div>
+                <section className="animals">
+                    <div>{this.createDropdownSpeciesSort()}</div>
+                    <div>{this.createDropdownActiveSort()}</div>
+                    {
 
-                            return <div>{this.createAnimalCard(animal)}
-                            </div>
-                        }
-                        if (this.state.selected === "all" && this.state.active === "all") {
-                            return <div>{this.createAnimalCard(animal)}
-                            </div>
-                        }
-                        if(this.state.selected===species && this.state.active==="all")
-                        return <div>{this.createAnimalCard(animal)}
-                            </div>
+                        this.props.animals.map((animal) => {
+                            console.log(animal)
+                            console.log(animal.owner)
+                            const status = animal.owner.isActive.toString()
+                            const species = animal.species.name
+                            if (this.state.selected === "all" && status === this.state.active) {
 
-                        else {
+                                return <div>{this.createAnimalCard(animal)}
+                                </div>
+                            }
+                            if (this.state.selected === species && status === this.state.active) {
 
-                }
+                                return <div>{this.createAnimalCard(animal)}
+                                </div>
+                            }
+                            if (this.state.selected === "all" && this.state.active === "all") {
+                                return <div>{this.createAnimalCard(animal)}
+                                </div>
+                            }
+                            if (this.state.selected === species && this.state.active === "all")
+                                return <div>{this.createAnimalCard(animal)}
+                                </div>
 
-                })}
-            </section>
+                            else {
+
+                            }
+
+                        })}
+                </section>
+            </React.Fragment>
         )
     }
 }

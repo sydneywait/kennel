@@ -14,5 +14,14 @@ export default {
         })
             .then(() => fetch(`http://localhost:5002/animals/?_expand=species&_expand=owner`))
             .then(e => e.json())
-    }
+    },
+    addNewAnimal(newAnimal) {
+        return fetch(`http://localhost:5002/animals`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newAnimal)
+        }).then(data => data.json())
+      }
 }

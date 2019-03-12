@@ -14,6 +14,7 @@ import AnimalDetail from './animal/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owner/OwnerDetail'
 import LocationDetail from './location/LocationDetail'
+import AnimalForm from './animal/AnimalForm'
 
 export default class ApplicationViews extends Component {
 
@@ -33,13 +34,13 @@ export default class ApplicationViews extends Component {
 
         AnimalAPIManager.getAllAnimals()
             .then(animals => newState.animals = animals)
-        EmployeeAPIManager.getAllEmployees()
+            .then(EmployeeAPIManager.getAllEmployees)
             .then(employees => newState.employees = employees)
-        LocationAPIManager.getAllLocations()
+            .then(LocationAPIManager.getAllLocations)
             .then(locations => newState.locations = locations)
-        OwnerAPIManager.getAllOwners()
+            .then(OwnerAPIManager.getAllOwners)
             .then(owners => newState.owners = owners)
-        SpeciesManager.getAllSpecies()
+            .then(SpeciesManager.getAllSpecies)
             .then(species => newState.species = species)
             .then(() => this.setState(newState))
 
@@ -101,14 +102,26 @@ export default class ApplicationViews extends Component {
                 })
                 )
         }
-        // patchEmployee: (id) => {
-        //     EmployeeAPIManager.patchEmployee(id)
-        //         .then(employees => this.setState({
-        //             employees: employees
-        //         })
-        //         )
-        // }
     }
+    add = {
+        addAnimal: animalObject =>
+            AnimalAPIManager.addNewAnimal(animalObject)
+                .then(() => AnimalAPIManager.getAllAnimals())
+                .then(animals =>
+                    this.setState({
+                        animals: animals
+                    })
+                )
+    }
+
+    // patchEmployee: (id) => {
+    //     EmployeeAPIManager.patchEmployee(id)
+    //         .then(employees => this.setState({
+    //             employees: employees
+    //         })
+    //         )
+    // }
+
 
     // edit ={
     //     editAnimal: (id) => {
@@ -152,7 +165,16 @@ export default class ApplicationViews extends Component {
                     return <LocationDetail {...props} locations={this.state.locations} deleteLocation={this.delete.deleteLocation} />
                 }} />
                 <Route exact path="/animals" render={(props) => {
-                    return <AnimalList {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
+                    return <AnimalList {...props}
+                        animals={this.state.animals} />
+                }} />
+                <Route path="/animals/new" render={(props) => {
+                    return <AnimalForm {...props}
+                        addAnimal={this.add.addAnimal}
+                        employees={this.state.employees}
+                        owners={this.state.owners}
+                        species={this.state.species}
+                    />
                 }} />
                 <Route path="/animals/:animalId(\d+)" render={(props) => {
                     return <AnimalDetail {...props} animals={this.state.animals} species={this.state.species} owners={this.state.owners} deleteAnimal={this.delete.deleteAnimal} />
@@ -167,7 +189,6 @@ export default class ApplicationViews extends Component {
                     return <OwnerList
                         {...props}
                         owners={this.state.owners}
-                        pets={this.state.pets}
                         animals={this.state.animals}
                         deleteOwner={this.delete.deleteOwner}
                         patchOwner={this.patch.patchOwner
