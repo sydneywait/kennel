@@ -44,11 +44,11 @@ export default class AnimalList extends Component {
         )
 
     }
-     // Update state whenever an input field is edited
-     handleFieldChange = evt => {
-         console.log("this is evt", evt)
-         console.log("this is evt.target.id", evt.target.id)
-         console.log("this is evt.target.value", evt.target.value)
+    // Update state whenever an input field is edited
+    handleFieldChange = evt => {
+        console.log("this is evt", evt)
+        console.log("this is evt.target.id", evt.target.id)
+        console.log("this is evt.target.value", evt.target.value)
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
         this.setState(stateToChange);
@@ -94,19 +94,21 @@ export default class AnimalList extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className="animalButton">
-                    <button type="button"
-                        className="btn btn-success"
-                        onClick={() => {
-                            this.props.history.push("/animals/new")
-                        }
-                        }>
-                        Admit Animal
+                <div className="animalHeader">
+                    <div className="speciesSort">{this.createDropdownSpeciesSort()}</div>
+                    <div className="activeSort">{this.createDropdownActiveSort()}</div>
+                    <div className="animalButton">
+                        <button type="button"
+                            className="btn btn-success"
+                            onClick={() => {
+                                this.props.history.push("/animals/new")
+                            }
+                            }>Admit Animal
                     </button>
+                    </div>
                 </div>
                 <section className="animals">
-                    <div>{this.createDropdownSpeciesSort()}</div>
-                    <div>{this.createDropdownActiveSort()}</div>
+
                     {
 
                         this.props.animals.map((animal) => {

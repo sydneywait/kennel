@@ -19,6 +19,11 @@
       "id": 4,
       "name": "Blaise Roberts",
       "image": "/images/people/beardPerson.png"
+    },
+    {
+      "name": "Gavin Beverage",
+      "image": "/images/people/maleEmployee.png",
+      "id": 5
     }
   ],
   "locations": [
@@ -61,6 +66,27 @@
       "speciesId": 5,
       "employeeId": 4,
       "id": 2
+    },
+    {
+      "name": "Chucky",
+      "ownerId": 8,
+      "speciesId": 4,
+      "employeeId": 2,
+      "id": 3
+    },
+    {
+      "name": "Jimmy",
+      "ownerId": 3,
+      "speciesId": 2,
+      "employeeId": 1,
+      "id": 4
+    },
+    {
+      "name": "Bob",
+      "ownerId": 7,
+      "speciesId": 3,
+      "employeeId": 1,
+      "id": 5
     }
   ],
   "species": [
@@ -143,6 +169,38 @@
       "image": "/images/people/oldLady.png",
       "goldMembership": false,
       "isActive": true
+    },
+    {
+      "name": "Kelly Wait",
+      "phone": "3043000869",
+      "image": "/images/people/vestLady.png",
+      "goldMembership": false,
+      "isActive": false,
+      "id": 7
+    },
+    {
+      "name": "Sydney Wait",
+      "phone": "3043000869",
+      "image": "/images/people/primLady.png",
+      "goldMembership": false,
+      "isActive": true,
+      "id": 8
+    },
+    {
+      "name": "Isaac Wait",
+      "phone": "123-456-7891",
+      "image": "/images/people/beardPerson.png",
+      "goldMembership": true,
+      "isActive": true,
+      "id": 9
+    },
+    {
+      "name": "George",
+      "phone": "1565465456465",
+      "image": "/images/people/boy.png",
+      "goldMembership": true,
+      "isActive": true,
+      "id": 10
     }
   ]
 }

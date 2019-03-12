@@ -37,3 +37,21 @@ p{
 .inactive{
     background-color: lightgray;
 }
+.ownerHeader{
+    display: flex;
+    flex-direction: row;
+
+
+}
+.ownerButton {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 0 10px 10px;
+    order: 2;
+  }
+
+  .dropDown{
+      display: flex;
+      justify-content: left;
+
+  }
