@@ -3,26 +3,36 @@
     {
       "id": 1,
       "name": "Jessica Younker",
-      "image": "/images/people/farmerLady.png"
+      "image": "/images/people/farmerLady.png",
+      "email": "jessica@kennel.com",
+      "password": "jessica"
     },
     {
       "id": 2,
       "name": "Jordan Nelson",
-      "image": "/images/people/maleEmployee.png"
+      "image": "/images/people/maleEmployee.png",
+      "email": "jordan@kennel.com",
+      "password": "jordan"
     },
     {
       "id": 3,
       "name": "Zoe LeBlanc",
-      "image": "/images/people/vestLady.png"
+      "image": "/images/people/vestLady.png",
+      "email": "zoe@kennel.com",
+      "password": "zoe"
     },
     {
       "id": 4,
       "name": "Blaise Roberts",
-      "image": "/images/people/beardPerson.png"
+      "image": "/images/people/beardPerson.png",
+      "email": "blaise@kennel.com",
+      "password": "blaise"
     },
     {
       "name": "Gavin Beverage",
       "image": "/images/people/maleEmployee.png",
+      "email": "gavin@kennel.com",
+      "password": "gavin",
       "id": 5
     }
   ],

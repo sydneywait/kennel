@@ -6,20 +6,33 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 export default class NavBar extends Component {
 
   state = { searchTerms: "" }
+  isAuthenticated = () => sessionStorage.getItem("credentials") !== null
+
+  addLogoutButton() {
+    if (this.isAuthenticated()) {
+      return (
+        <React.Fragment>
+          <Nav.Item>
+            <Link className="nav-link" to="/logout">Logout</Link>
+          </Nav.Item>
+        </React.Fragment>)
+    }
+  }
+
 
   render() {
     const activeTab = this.state.activeTab
     return (
       <Nav >
         <Nav.Item>
-          <Link className="nav-link"  to="/">Locations</Link>
+          <Link className="nav-link" to="/">Locations</Link>
 
         </Nav.Item>
         <Nav.Item>
-          <Link className="nav-link"  to="/employees">Employees</Link>
+          <Link className="nav-link" to="/employees">Employees</Link>
         </Nav.Item>
         <Nav.Item>
-        <Link className="nav-link" to="/owners">Owners</Link>
+          <Link className="nav-link" to="/owners">Owners</Link>
           {/* <NavDropdown title ="Owners" id ="nav-dropdown-owner" onSelect={k => this.handleOwnerSelect(k)}>
           <NavDropdown.Item eventKey="all">All Owners</NavDropdown.Item>
           <NavDropdown.Item eventKey="active">Active Owners</NavDropdown.Item>
@@ -27,8 +40,8 @@ export default class NavBar extends Component {
           </NavDropdown> */}
         </Nav.Item>
         <Nav.Item>
-        <Link className="nav-link" to="/animals">Animals</Link>
-        {/* <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
+          <Link className="nav-link" to="/animals">Animals</Link>
+          {/* <NavDropdown title="Animals" id="nav-dropdown" onSelect={k => this.handleAnimalSelect(k)}>
           <NavDropdown.Item eventKey="all-0">All Animals</NavDropdown.Item>
           <NavDropdown.Item eventKey="cat-1">cats</NavDropdown.Item>
           <NavDropdown.Item eventKey="dog-2">dogs</NavDropdown.Item>
@@ -46,7 +59,11 @@ export default class NavBar extends Component {
             onKeyPress={this.handleKeyPress}
             onChange={this.handleFieldChange} />
         </Nav.Item>
+        {this.addLogoutButton()}
       </Nav>
+
+
+
     );
   }
 
@@ -61,29 +78,29 @@ export default class NavBar extends Component {
 
 
   handleAnimalSelect = (k) => {
-      const activeK =k.split("-")
-      const activeKName= {"activeK": activeK}
-console.log("active key", activeKName)
-this.setState({ searchTerms: "" })
-        this.props.history.push({
-          pathname: "/animals",
-          state: activeKName
+    const activeK = k.split("-")
+    const activeKName = { "activeK": activeK }
+    console.log("active key", activeKName)
+    this.setState({ searchTerms: "" })
+    this.props.history.push({
+      pathname: "/animals",
+      state: activeKName
 
-        })
+    })
 
-}
+  }
 
-handleOwnerSelect = (k) => {
-  const activeK = {"activeK": k}
-console.log("active key", activeK)
-this.setState({ searchTerms: "" })
+  handleOwnerSelect = (k) => {
+    const activeK = { "activeK": k }
+    console.log("active key", activeK)
+    this.setState({ searchTerms: "" })
     this.props.history.push({
       pathname: "/owners",
       state: activeK
 
     })
 
-}
+  }
   handleKeyPress = (evt) => {
     if (evt.key === 'Enter') {
       const searchTerm = evt.target.value

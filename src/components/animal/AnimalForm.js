@@ -61,17 +61,7 @@ export default class AnimalForm extends Component {
                             placeholder="Animal name"
                         />
                     </div>
-                    {/* <div className="form-group">
-                        <label htmlFor="species">Species</label>
-                        <input
-                            type="text"
-                            required
-                            className="form-control"
-                            onChange={this.handleFieldChange}
-                            id="speciesId"
-                            placeholder="Species"
-                        />
-                    </div> */}
+
                     <div className="form-group">
                         <label htmlFor="owner"></label>
                         <select
