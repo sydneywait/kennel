@@ -36,3 +36,19 @@ text-align: center;
 
 
 }
+
+.img-uploader{
+    width:150px;
+    align-self: left;
+
+}
+
+.register-form{
+
+    display: flex;
+    flex-direction: column;
+
+}
+label{
+    padding-right: 10px;
+}

@@ -49,7 +49,7 @@ export default class Register extends Component {
         this.props.addEmployee(employee)
     }
 
-    handleRegister=(evt)=>{
+    handleRegister = (evt) => {
         evt.preventDefault();
         console.log("inside handleRegister")
         this.constructNewEmployee()
@@ -67,40 +67,45 @@ export default class Register extends Component {
     render() {
         return (
             <section className="registerForm">
-            <ImageUploader
-                        withIcon={true}
-                        buttonText='Choose image'
-                        onChange={this.onDrop}
-                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                        maxFileSize={5242880}
-                    />
-                {/* <form onSubmit={this.handleRegister}> */}
-                    <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
-                    <label htmlFor="inputName">
-                        Name
-                    </label>
-                    <input onChange={this.handleFieldChange} type="name"
-                        id="name"
-                        placeholder="Name (first and last)"
-                        required="" autoFocus="" />
-                    <label htmlFor="inputEmail">
-                        Email address
-                    </label>
-                    <input onChange={this.handleFieldChange} type="email"
-                        id="email"
-                        placeholder="Email address"
-                        required="" autoFocus="" />
-                    <label htmlFor="inputPassword">
-                        Password
-                    </label>
-                    <input onChange={this.handleFieldChange} type="password"
-                        id="password"
-                        placeholder="Password"
-                        required="" />
-                    <label htmlFor="inputPicture">Profile Picture</label>
 
-                    <button type="submit" onClick={this.handleRegister}>
-                        Register
+                {/* <form onSubmit={this.handleRegister}> */}
+                <h1 className="h3 mb-3 font-weight-normal">Please Register</h1>
+                <div><label htmlFor="inputName">
+                    Name
+                    </label>
+                <input onChange={this.handleFieldChange} type="name"
+                    className="reg-input"
+                    id="name"
+                    placeholder="Name (first and last)"
+                    required="" autoFocus="" /></div>
+                <div><label htmlFor="inputEmail">
+                    Email address
+                    </label>
+                <input onChange={this.handleFieldChange} type="email"
+                    className="reg-input"
+                    id="email"
+                    placeholder="Email address"
+                    required="" autoFocus="" /></div>
+                <div><label htmlFor="inputPassword">
+                    Password
+                    </label>
+                <input onChange={this.handleFieldChange} type="password"
+                    className="reg-input"
+                    id="password"
+                    placeholder="Password"
+                    required="" /></div>
+
+                <div className="img-uploader">
+                {/* <label htmlFor="inputPicture">Profile Picture</label> */}
+                <ImageUploader
+                    withIcon={true}
+                    buttonText='Choose Profile Picture'
+                    onChange={this.onDrop}
+                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                    maxFileSize={5242880}
+                /></div>
+                <button type="submit" onClick={this.handleRegister}>
+                    Register
                     </button>
                 {/* </form> */}
 
