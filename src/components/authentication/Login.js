@@ -1,12 +1,13 @@
 import React, { Component } from "react"
-
+import { Link } from "react-router-dom"
 
 export default class Login extends Component {
 
     // Set initial state
     state = {
         email: "",
-        password: ""
+        password: "",
+        counter: 0
     }
 
     // Update state whenever an input field is edited
@@ -14,6 +15,9 @@ export default class Login extends Component {
         const stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
         this.setState(stateToChange)
+        if(evt.target.id==="email"){
+            this.setState({counter:0})
+        }
 
     }
 
@@ -29,7 +33,9 @@ export default class Login extends Component {
         })
 
         if (employee) {
+
             console.log(employee)
+            let counter = this.state.counter;
             isEmailMatch = true;
             if (employee.password === this.state.password) {
                 isPasswordMatch = true;
@@ -38,8 +44,14 @@ export default class Login extends Component {
                 isPasswordMatch = false
                 window.alert("The password does not match")
                 //figure out how to clear the form
+                counter++
+                this.setState({ counter: counter })
+                console.log(counter)
+                if (counter === 5) {
+                    this.props.history.push("/giphy")
+                    }
 
-                this.props.history.push("/login")
+
             }
         }
         else {
@@ -65,26 +77,32 @@ export default class Login extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleLogin}>
-                <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label htmlFor="inputEmail">
-                    Email address
+            <section className="loginForm">
+                <form onSubmit={this.handleLogin}>
+                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <label htmlFor="inputEmail">
+                        Email address
                 </label>
-                <input onChange={this.handleFieldChange} type="email"
-                    id="email"
-                    placeholder="Email address"
-                    required="" autoFocus="" />
-                <label htmlFor="inputPassword">
-                    Password
+                    <input onChange={this.handleFieldChange} type="email"
+                        id="email"
+                        placeholder="Email address"
+                        required="" autoFocus="" />
+                    <label htmlFor="inputPassword">
+                        Password
                 </label>
-                <input onChange={this.handleFieldChange} type="password"
-                    id="password"
-                    placeholder="Password"
-                    required="" />
-                <button type="submit">
-                    Sign in
+                    <input onChange={this.handleFieldChange} type="password"
+                        id="password"
+                        placeholder="Password"
+                        required="" />
+                    <button type="submit">
+                        Sign in
                 </button>
-            </form>
+                </form>
+                <Link className="nav-link" to={`/register`}>Are you a new Employee?</Link>
+
+
+
+            </section>
         )
     }
 }

@@ -34,6 +34,20 @@
       "email": "gavin@kennel.com",
       "password": "gavin",
       "id": 5
+    },
+    {
+      "name": "Sydney Wait",
+      "email": "sydney@kennel.com",
+      "image": "/images/people/hipLady.png",
+      "password": "sydney",
+      "id": 6
+    },
+    {
+      "name": "Jordan Castelloe",
+      "email": "jordan@kennel.com",
+      "image": "/images/people/hardHatguy.png",
+      "password": "jordan",
+      "id": 7
     }
   ],
   "locations": [
@@ -97,6 +111,13 @@
       "speciesId": 3,
       "employeeId": 1,
       "id": 5
+    },
+    {
+      "name": "Goofy",
+      "ownerId": 2,
+      "speciesId": 2,
+      "employeeId": 5,
+      "id": 6
     }
   ],
   "species": [

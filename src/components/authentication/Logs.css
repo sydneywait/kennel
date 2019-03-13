@@ -21,3 +21,18 @@ text-align: center;
     align-self: center;
     margin-top: 50px;
 }
+
+.giphy{
+    margin: 50px;
+    padding: 25px 0px 25px 0px;
+    display:flex;
+   flex-direction: column;
+}
+
+.angryGirl{
+
+    width: 75vw;
+    align-self: center;
+
+
+}

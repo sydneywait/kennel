@@ -19,6 +19,8 @@ import OwnerForm from './owner/OwnerForm'
 import EmployeeForm from './employee/EmployeeForm'
 import Login from './authentication/Login'
 import Logout from './authentication/Logout'
+import Register from './authentication/Register'
+import Giphy from './authentication/Giphy'
 export default class ApplicationViews extends Component {
 
 
@@ -306,6 +308,17 @@ export default class ApplicationViews extends Component {
                     return <Logout {...props}
                     />
                 }}/>
+                <Route path="/register" render={(props)=>{
+                    return <Register {...props}
+                    employees ={this.state.employees}
+                    addEmployee={this.add.addEmployee} />
+
+                }}/>
+                <Route path="/giphy" render={(props)=>{
+                    return <Giphy {...props}/>
+
+                }}/>
+
 
 
             </React.Fragment >
