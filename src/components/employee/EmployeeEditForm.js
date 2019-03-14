@@ -7,7 +7,8 @@ export default class EmployeeEditForm extends Component {
         name: "",
         image: "",
         email: "",
-        password: ""
+        password: "",
+        locationId:""
     }
 
 
@@ -27,6 +28,7 @@ export default class EmployeeEditForm extends Component {
                 image: this.state.image,
                 email: this.state.email,
                 password: this.state.password,
+                locationId: this.state.locationId
 
 
             };
@@ -43,7 +45,8 @@ export default class EmployeeEditForm extends Component {
                     name: employee.name,
                     image: employee.image,
                     email: employee.email,
-                    password: employee.password
+                    password: employee.password,
+                    locationId: employee.locationId
                 });
             });
     }
@@ -62,6 +65,23 @@ export default class EmployeeEditForm extends Component {
                             id="name"
                             value={this.state.name}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="location"></label>
+                        <select
+                            defaultValue=""
+                            name="location"
+                            id="location"
+                            onChange={this.handleFieldChange}
+                            value={this.state.locationId}
+                        >
+                            <option value="">Select a Location</option>
+                            {this.props.locations.map(e => (
+                                <option key={e.id} id={e.id} value={e.id}>
+                                    {e.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="form-group">

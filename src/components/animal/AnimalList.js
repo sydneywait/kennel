@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./Animal.css"
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form"
+import AnimalCard from "./AnimalCard"
 
 export default class AnimalList extends Component {
     state = {
@@ -54,31 +55,31 @@ export default class AnimalList extends Component {
         this.setState(stateToChange);
     };
 
-    createAnimalCard(animal) {
-        let cardClass = ""
-        if (animal.owner.isActive === true) {
-            cardClass = "card-body active"
-        }
-        else {
-            cardClass = "card-body inactive"
-        }
-        return (
-            <React.Fragment>
+    // createAnimalCard(animal) {
+    //     let cardClass = ""
+    //     if (animal.owner.isActive === true) {
+    //         cardClass = "card-body active"
+    //     }
+    //     else {
+    //         cardClass = "card-body inactive"
+    //     }
+    //     return (
+    //         <React.Fragment>
 
-                <div key={animal.id} className="card">
-                    <div className={cardClass}>
-                        <h5 className="card-title">
-                            <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
-                            <p>{animal.name}</p>
-                            <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
+    //             <div key={animal.id} className="card">
+    //                 <div className={cardClass}>
+    //                     <h5 className="card-title">
+    //                         <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
+    //                         <p>{animal.name}</p>
+    //                         <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
 
-                        </h5>
-                    </div>
-                </div>
+    //                     </h5>
+    //                 </div>
+    //             </div>
 
-            </React.Fragment>
-        )
-    }
+    //         </React.Fragment>
+    //     )
+    // }
 
 
     handleSelect = (evt) => {
@@ -119,21 +120,35 @@ export default class AnimalList extends Component {
                             const species = animal.species.name
                             if (this.state.selected === "all" && status === this.state.active) {
 
-                                return <div>{this.createAnimalCard(animal)}
-                                </div>
+                                // return <div>{this.createAnimalCard(animal)}
+                                // </div>
+                                return this.props.animals.map(animal =>
+                                    <AnimalCard
+                                    key={animal.id}
+                                    animal={animal} {...this.props} />
+                                )
                             }
                             if (this.state.selected === species && status === this.state.active) {
 
-                                return <div>{this.createAnimalCard(animal)}
-                                </div>
+                                return this.props.animals.map(animal =>
+                                    <AnimalCard
+                                    key={animal.id}
+                                    animal={animal} {...this.props} />
+                                )
                             }
                             if (this.state.selected === "all" && this.state.active === "all") {
-                                return <div>{this.createAnimalCard(animal)}
-                                </div>
+                                return this.props.animals.map(animal =>
+                                    <AnimalCard
+                                    key={animal.id}
+                                    animal={animal} {...this.props} />
+                                )
                             }
                             if (this.state.selected === species && this.state.active === "all")
-                                return <div>{this.createAnimalCard(animal)}
-                                </div>
+                            return this.props.animals.map(animal =>
+                                <AnimalCard
+                                key={animal.id}
+                                animal={animal} {...this.props} />
+                            )
 
                             else {
 

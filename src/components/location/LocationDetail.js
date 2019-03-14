@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "./Location.css"
+import EmployeeCard from "../employee/EmployeeCard"
 
 
 
@@ -32,6 +33,15 @@ console.log(this.location)
                             className="card-link">Delete</a>
                     </div>
                 </div>
+
+                <h2>Employees:</h2>
+                <div className="employee-container">
+                {this.props.employees.filter(employee => employee.locationId === location.id).map(employeeMatch => <EmployeeCard
+                                            key={employeeMatch.id}
+                                            employee={employeeMatch} {...this.props} />)}</div>
+                    )
+
+
             </section>
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "./Employee.css"
+import AnimalCard from "../animal/AnimalCard"
 
 
 
@@ -46,6 +47,9 @@ export default class EmployeeDetail extends Component {
                         </div>
                     </div>
                 </div>
+                <div><h2>Animals in care:</h2>{this.props.animals.filter(animal => animal.employeeId === employee.id).map(animalMatch => <AnimalCard
+                                            key={animalMatch.id}
+                                            animal={animalMatch} {...this.props} />)}</div>
             </section>
         )
     }

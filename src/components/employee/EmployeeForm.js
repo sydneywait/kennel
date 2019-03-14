@@ -9,7 +9,8 @@ export default class EmployeeForm extends Component {
         name: "",
         image: "",
         email: "",
-        password:""
+        password:"",
+        locationId: ""
 
     };
 
@@ -31,7 +32,8 @@ export default class EmployeeForm extends Component {
                 name: this.state.name,
                 image: this.state.image,
                 password: this.state.password,
-                email: this.state.email
+                email: this.state.email,
+                locationId: this.state.locationId
             };
             console.log(employee)
 
@@ -79,6 +81,22 @@ export default class EmployeeForm extends Component {
                         />
                     </div>
 
+                    <div className="form-group">
+                        <label htmlFor="location"></label>
+                        <select
+                            defaultValue=""
+                            name="location"
+                            id="location"
+                            onChange={this.handleFieldChange}
+                        >
+                            <option value="">Select a Location</option>
+                            {this.props.locations.map(e => (
+                                <option key={e.id} id={e.id} value={e.id}>
+                                    {e.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="image"></label>
                         <select

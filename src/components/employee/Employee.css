@@ -1,7 +1,8 @@
-.employees {
+.employee-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .icon--employee {
@@ -10,9 +11,17 @@
 }
 
 .card {
-    width: 12rem;
+    width: 300px;
+}
+.card-body{
+
+
 }
 
+.animalList{
+    font-size: 0.6em;
+    text-align: left;
+}
 .card-title {
     display: flex;
     justify-content: space-around;

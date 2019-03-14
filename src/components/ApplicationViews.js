@@ -205,7 +205,9 @@ export default class ApplicationViews extends Component {
                     if (this.isAuthenticated()) {
                         return <LocationDetail {...props}
                             locations={this.state.locations}
-                            deleteLocation={this.delete.deleteLocation} />
+                            deleteLocation={this.delete.deleteLocation}
+                            employees={this.state.employees}
+                            animals={this.state.animals} />
                     }
                     else {
                         return <Redirect to="/login" />
@@ -254,6 +256,8 @@ export default class ApplicationViews extends Component {
                     if (this.isAuthenticated()) {
                         return <EmployeeList {...props}
                             employees={this.state.employees}
+                            animals={this.state.animals}
+                            locations={this.state.locations}
                             deleteEmployee={this.delete.deleteEmployee} />
                     }
                     else { return <Redirect to="/login" /> }
@@ -262,6 +266,7 @@ export default class ApplicationViews extends Component {
                     if (this.isAuthenticated()) {
                         return <EmployeeDetail {...props}
                             employees={this.state.employees}
+                            animals={this.state.animals}
                             deleteEmployee={this.delete.deleteEmployee} />
                     }
                     else { return <Redirect to="/login" /> }
@@ -270,6 +275,7 @@ export default class ApplicationViews extends Component {
                         return <EmployeeEditForm {...props}
                         employees={this.state.employees}
                         editEmployee={this.edit.editEmployee}
+                        locations={this.state.locations}
                         />
                     }}/>
                 <Route path="/employees/new" render={(props) => {
@@ -277,6 +283,7 @@ export default class ApplicationViews extends Component {
                         return <EmployeeForm {...props}
                             employees={this.state.employees}
                             addEmployee={this.add.addEmployee}
+                            locations={this.state.locations}
                         />
                     }
                     else { return <Redirect to="/login" /> }

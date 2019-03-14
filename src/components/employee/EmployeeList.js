@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
 import "./Employee.css"
+import EmployeeCard from "./EmployeeCard"
+
 
 export default class EmployeeList extends Component {
     render() {
+        console.log(this.props)
         return (
             <React.Fragment>
 
@@ -18,23 +20,14 @@ export default class EmployeeList extends Component {
                     </button>
                     </div>
                 </div>
-                <section className="employees">
-                    {
-                        this.props.employees.map(employee =>
-                            <div key={employee.id} className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">
-                                        <img src={window.location.origin + employee.image} className="icon--employee" />
-                                        {employee.name}
+                <div className="employee-container">
+                    {this.props.employees.map(employee =>
+                                    <EmployeeCard
+                        key={employee.id}
+                        employee={employee} {...this.props} />
+                    )
 
-                                        <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
-
-                                    </h5>
-                                </div>
-                            </div>
-                        )
-                    }
-                </section>
+                    }</div>
             </React.Fragment>
         )
     }
