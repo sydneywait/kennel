@@ -31,3 +31,9 @@
     justify-content: left;
     margin: 0 0 10px 10px;
 }
+
+.button-div{
+    display: flex;
+    flex-direction: row;
+    margin:auto;
+}

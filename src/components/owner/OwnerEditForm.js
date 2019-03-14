@@ -18,7 +18,7 @@ export default class OwnerEditForm extends Component {
         this.setState(stateToChange)
     }
 
-    updateExistingAnimal = evt => {
+    updateExistingOwner = evt => {
         evt.preventDefault()
 
         if (this.state.employee === "") {
@@ -137,7 +137,7 @@ export default class OwnerEditForm extends Component {
 
                     <button
                         type="submit"
-                        onClick={this.updateExistingAnimal}
+                        onClick={this.updateExistingOwner}
                         className="btn btn-primary"
                     >
                         Submit

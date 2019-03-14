@@ -12,7 +12,7 @@ export default class EmployeeDetail extends Component {
             collection that was passed down from ApplicationViews
         */
         const employee = this.props.employees.find(a => a.id === parseInt(this.props.match.params.employeeId)) || {}
-console.log(this.employee)
+        console.log(this.employee)
 
         console.log(this.props)
         return (
@@ -25,10 +25,25 @@ console.log(this.employee)
                         </h4>
                         <h5 className="card-title">{employee.name}</h5>
 
-                        <a href="#"
-                            onClick={() => this.props.deleteEmployee(employee.id)
-                                            .then(() => this.props.history.push("/employees"))}
-                            className="card-link">Delete</a>
+                        <div className="button-div">
+                            <button
+                                type="button"
+                                className="btn btn-success"
+                                onClick={() => {
+                                    this.props.history.push(`/employees/${employee.id}/edit`);
+                                }}
+                            >
+                                Edit
+</button>
+                            <button
+                                type="submit"
+                                className="btn btn-danger"
+                                onClick={() => {
+                                    this.props.deleteEmployee(employee.id)
+                                    this.props.history.push("/employees")}}
+                            >Delete</button>
+
+                        </div>
                     </div>
                 </div>
             </section>
