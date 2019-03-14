@@ -71,6 +71,7 @@ export default class AnimalList extends Component {
                             <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
                             <p>{animal.name}</p>
                             <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
+
                         </h5>
                     </div>
                 </div>

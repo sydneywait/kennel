@@ -21,6 +21,7 @@ import Login from './authentication/Login'
 import Logout from './authentication/Logout'
 import Register from './authentication/Register'
 import Giphy from './authentication/Giphy'
+import AnimalEditForm from './animal/AnimalEditForm'
 export default class ApplicationViews extends Component {
 
 
@@ -152,37 +153,39 @@ export default class ApplicationViews extends Component {
     // }
 
 
-    // edit ={
-    //     editAnimal: (id) => {
-    //         AnimalAPIManager.editAnimal(id)
-    //             .then(animals => this.setState({
-    //                 animals: animals
-    //             })
-    //             )
-    //     },
-    //     editLocation: (id) => {
-    //         LocationAPIManager.editLocation(id)
-    //             .then(locations => this.setState({
-    //                 locations: locations
-    //             })
-    //             )
-    //     },
-    //     editOwner: (id) => {
-    //         OwnerAPIManager.editOwner(id)
-    //             .then(owners => this.setState({
-    //                 owners: owners
-    //             })
-    //             )
-    //     },
-    //     editEmployee: (id) => {
-    //         EmployeeAPIManager.editEmployee(id)
-    //             .then(employees => this.setState({
-    //                 employees: employees
-    //             })
-    //             )
-    //     }
+    edit ={
+        editAnimal: (object) => {
+            AnimalAPIManager.editAnimal(object)
+            .then(() => AnimalAPIManager.getAllAnimals())
+            .then(animals => {
+              this.setState({
+                animals: animals
+                })
+            })
+        },
+        // editLocation: (id) => {
+        //     LocationAPIManager.editLocation(id)
+        //         .then(locations => this.setState({
+        //             locations: locations
+        //         })
+        //         )
+        // },
+        // editOwner: (id) => {
+        //     OwnerAPIManager.editOwner(id)
+        //         .then(owners => this.setState({
+        //             owners: owners
+        //         })
+        //         )
+        // },
+        // editEmployee: (id) => {
+        //     EmployeeAPIManager.editEmployee(id)
+        //         .then(employees => this.setState({
+        //             employees: employees
+        //         })
+        //         )
+        // }
 
-    // }
+    }
 
     render() {
         return (
@@ -228,7 +231,7 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
-                <Route path="/animals/:animalId(\d+)" render={(props) => {
+                <Route exact path="/animals/:animalId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <AnimalDetail {...props}
                             animals={this.state.animals}
@@ -238,6 +241,15 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
+                <Route
+                    path="/animals/:animalId(\d+)/edit" render={props => {
+                        return <AnimalEditForm {...props}
+                        employees={this.state.employees}
+                        editAnimal={this.edit.editAnimal}
+                        species ={this.state.species}
+                        owners={this.state.owners}/>
+                    }}
+                />
                 <Route exact path="/employees" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <EmployeeList {...props}
@@ -297,27 +309,28 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route path="/search" render={(props) => {
                     if (this.isAuthenticated()) {
-                    return <SearchResults {...props}/>}
+                        return <SearchResults {...props} />
+                    }
                     else { return <Redirect to="/login" /> }
                 }} />
-                <Route path="/login" render={(props)=>{
+                <Route path="/login" render={(props) => {
                     return <Login {...props}
-                    employees ={this.state.employees}/>
-                }}/>
-                <Route path="/logout" render={(props)=>{
+                        employees={this.state.employees} />
+                }} />
+                <Route path="/logout" render={(props) => {
                     return <Logout {...props}
                     />
-                }}/>
-                <Route path="/register" render={(props)=>{
+                }} />
+                <Route path="/register" render={(props) => {
                     return <Register {...props}
-                    employees ={this.state.employees}
-                    addEmployee={this.add.addEmployee} />
+                        employees={this.state.employees}
+                        addEmployee={this.add.addEmployee} />
 
-                }}/>
-                <Route path="/giphy" render={(props)=>{
-                    return <Giphy {...props}/>
+                }} />
+                <Route path="/giphy" render={(props) => {
+                    return <Giphy {...props} />
 
-                }}/>
+                }} />
 
 
 

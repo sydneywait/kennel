@@ -18,25 +18,36 @@ export default class AnimalDetail extends Component {
         console.log(this.props)
         return (
 
-                <section className="animal">
-                    <div key={animal.id} className="card">
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                <img src={window.location.origin + speciesLink} className="icon--animal" />
-                                {animal.name}
-                            </h4>
-                            <h5 className="card-title">{animal.species.name}</h5>
-                            <p className="ownerName">Owner: {owner}</p>
-                            <a href="#" onClick={() => {
-                                this.props.deleteAnimal(animal.id)
-                                this.props.history.push("/animals")
+            <section className="animal">
+                <div key={animal.id} className="card">
+                    <div className="card-body">
+                        <h4 className="card-title">
+                            <img src={window.location.origin + speciesLink} className="icon--animal" />
+                            {animal.name}
+                        </h4>
+                        <h5 className="card-title">{animal.species.name}</h5>
+                        <p className="ownerName">Owner: {owner}</p>
+                        <div className="discharge-btn">
+                        <button type = "button"
+                        className = "btn btn-success"
+                        onClick={() => {
+                            this.props.deleteAnimal(animal.id)
+                            this.props.history.push("/animals")
+                        }}
+
+
+                            >Discharge</button>
+                        <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() => {
+                                this.props.history.push(`/animals/${animal.id}/edit`);
                             }}
-
-
-                                className="card-link">Delete</a>
-                        </div>
+                        >
+                            Edit</button></div>
                     </div>
-                </section>
+                </div>
+            </section>
 
         )
     }

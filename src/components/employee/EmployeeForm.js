@@ -7,7 +7,9 @@ export default class EmployeeForm extends Component {
     // Set initial state
     state = {
         name: "",
-        image: ""
+        image: "",
+        email: "",
+        password:""
 
     };
 
@@ -28,6 +30,8 @@ export default class EmployeeForm extends Component {
             const employee = {
                 name: this.state.name,
                 image: this.state.image,
+                password: this.state.password,
+                email: this.state.email
             };
             console.log(employee)
 
@@ -50,6 +54,28 @@ export default class EmployeeForm extends Component {
                             onChange={this.handleFieldChange}
                             id="name"
                             placeholder="Employee name"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="EmployeeName">Employee Email</label>
+                        <input
+                            type="text"
+                            required
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="email"
+                            placeholder="Email Address"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="EmployeeName">Employee Password</label>
+                        <input
+                            type="text"
+                            required
+                            className="form-control"
+                            onChange={this.handleFieldChange}
+                            id="password"
+                            placeholder="Employee Password"
                         />
                     </div>
 

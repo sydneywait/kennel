@@ -85,11 +85,11 @@
       "id": 1
     },
     {
+      "id": 2,
       "name": "Steve",
-      "ownerId": 2,
-      "speciesId": 5,
+      "speciesId": 1,
       "employeeId": 4,
-      "id": 2
+      "ownerId": 5
     },
     {
       "name": "Chucky",
