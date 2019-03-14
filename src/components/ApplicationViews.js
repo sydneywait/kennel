@@ -22,6 +22,8 @@ import Logout from './authentication/Logout'
 import Register from './authentication/Register'
 import Giphy from './authentication/Giphy'
 import AnimalEditForm from './animal/AnimalEditForm'
+import OwnerEditForm from './owner/OwnerEditForm'
+import EmployeeEditForm from './employee/EmployeeEditForm'
 export default class ApplicationViews extends Component {
 
 
@@ -163,27 +165,25 @@ export default class ApplicationViews extends Component {
                 })
             })
         },
-        // editLocation: (id) => {
-        //     LocationAPIManager.editLocation(id)
-        //         .then(locations => this.setState({
-        //             locations: locations
-        //         })
-        //         )
-        // },
-        // editOwner: (id) => {
-        //     OwnerAPIManager.editOwner(id)
-        //         .then(owners => this.setState({
-        //             owners: owners
-        //         })
-        //         )
-        // },
-        // editEmployee: (id) => {
-        //     EmployeeAPIManager.editEmployee(id)
-        //         .then(employees => this.setState({
-        //             employees: employees
-        //         })
-        //         )
-        // }
+
+        editOwner: (object) => {
+            OwnerAPIManager.editOwner(object)
+            .then(() => OwnerAPIManager.getAllOwners())
+            .then(owners => {
+              this.setState({
+                owners: owners
+                })
+            })
+        },
+        editEmployee: (object) => {
+            EmployeeAPIManager.editEmployee(object)
+            .then(() => EmployeeAPIManager.getAllEmployees())
+            .then(employees => {
+              this.setState({
+                employees: employees
+                })
+            })
+        },
 
     }
 
@@ -258,7 +258,7 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
-                <Route path="/employees/:employeeId(\d+)" render={(props) => {
+                <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <EmployeeDetail {...props}
                             employees={this.state.employees}
@@ -266,6 +266,12 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
+                <Route path="/employees/:employeeId(\d+)/edit" render={props => {
+                        return <EmployeeEditForm {...props}
+                        employees={this.state.employees}
+                        editEmployee={this.edit.editEmployee}
+                        />
+                    }}/>
                 <Route path="/employees/new" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <EmployeeForm {...props}
@@ -288,7 +294,7 @@ export default class ApplicationViews extends Component {
                     else { return <Redirect to="/login" /> }
 
                 }} />
-                <Route path="/owners/:ownerId(\d+)" render={(props) => {
+                <Route exact path="/owners/:ownerId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <OwnerDetail {...props}
                             owners={this.state.owners}
@@ -297,6 +303,12 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
+                <Route path="/owners/:ownerId(\d+)/edit" render={props => {
+                        return <OwnerEditForm {...props}
+                        owners={this.state.owners}
+                        editowner={this.edit.editowner}
+                        />
+                    }}/>
                 <Route path="/owners/new" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <OwnerForm {...props}

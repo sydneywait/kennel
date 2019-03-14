@@ -166,7 +166,7 @@
       "name": "Emma Beaton",
       "phone": "304-123-4567",
       "image": "/images/people/girl.png",
-      "goldMembership": true,
+      "goldMembership": false,
       "isActive": true
     },
     {
