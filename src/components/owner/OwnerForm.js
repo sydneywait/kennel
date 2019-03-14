@@ -102,7 +102,7 @@ export default class OwnerForm extends Component {
 
                             <option key="1" id="1" value={true}>Gold
                                 </option>
-                            <option key="1" id="1" value={false}>Standard
+                            <option key="2" id="2" value={false}>Standard
                                 </option>
 
                         </select>

@@ -306,7 +306,7 @@ export default class ApplicationViews extends Component {
                 <Route path="/owners/:ownerId(\d+)/edit" render={props => {
                         return <OwnerEditForm {...props}
                         owners={this.state.owners}
-                        editowner={this.edit.editowner}
+                        editOwner={this.edit.editOwner}
                         />
                     }}/>
                 <Route path="/owners/new" render={(props) => {

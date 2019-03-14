@@ -166,8 +166,8 @@
       "name": "Emma Beaton",
       "phone": "304-123-4567",
       "image": "/images/people/girl.png",
-      "goldMembership": false,
-      "isActive": true
+      "goldMembership": true,
+      "isActive": false
     },
     {
       "id": 3,
@@ -195,11 +195,11 @@
     },
     {
       "id": 6,
-      "name": "Angela Lee",
+      "name": "Angela Leek",
       "phone": "304-123-4567",
       "image": "/images/people/oldLady.png",
-      "goldMembership": false,
-      "isActive": true
+      "goldMembership": true,
+      "isActive": false
     },
     {
       "name": "Kelly Wait",

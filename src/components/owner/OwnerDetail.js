@@ -25,11 +25,11 @@ export default class OwnerDetail extends Component {
         return (
             <React.Fragment>
                 <button
-                type="button"
-                className="btn btn-danger"
+                    type="button"
+                    className="btn btn-danger"
                     onClick={() => this.props.patchOwner(archive, ownerId)
                         .then(this.props.history.push("/owners"))}
-                    >Delete</button>
+                >Delete</button>
 
 
             </React.Fragment>
@@ -40,11 +40,11 @@ export default class OwnerDetail extends Component {
         return (
             <React.Fragment>
                 <button
-                type="button"
-                className="btn btn-primary"
+                    type="button"
+                    className="btn btn-primary"
                     onClick={() => this.props.patchOwner(activate, ownerId)
                         .then(this.props.history.push("/owners"))}
-                    >Reinstate</button>
+                >Reinstate</button>
             </React.Fragment>
         )
     }
@@ -53,11 +53,11 @@ export default class OwnerDetail extends Component {
         return (
             <React.Fragment>
                 <button
-                type="button"
-                className="btn btn-secondary"
+                    type="button"
+                    className="btn btn-secondary"
                     onClick={() => this.props.patchOwner(downgrade, ownerId)
                         .then(this.props.history.push("/owners"))}
-                    >Downgrade</button>
+                >Downgrade</button>
 
             </React.Fragment>
         )
@@ -67,18 +67,18 @@ export default class OwnerDetail extends Component {
         return (
             <React.Fragment>
                 <button
-                type="button"
-                className="btn btn-warning"
+                    type="button"
+                    className="btn btn-warning"
                     onClick={() => this.props.patchOwner(upgrade, ownerId)
                         .then(this.props.history.push("/owners"))}
-                    >Upgrade</button>
+                >Upgrade</button>
 
             </React.Fragment>
         )
     }
     render() {
         /*
-            Using the route parameter, find the animal that the
+            Using the route parameter, find the owner that the
             user clicked on by looking at the `this.props.animals`
             collection that was passed down from ApplicationViews
         */
@@ -107,10 +107,11 @@ export default class OwnerDetail extends Component {
                         </h4>
                         <h5 className="card-title">{owner.name}</h5>
                         <p>{owner.phone}</p>
-
-                        {owner.isActive ? this.displayActive(archive, owner.id) : this.displayInactive(activate, owner.id)}
-                        {owner.goldMembership ? this.downgrade(downgrade, owner.id) : this.upgrade(upgrade, owner.id)}
-
+                        <div className="button-div">
+                            {owner.isActive ? this.displayActive(archive, owner.id) : this.displayInactive(activate, owner.id)}
+                            {owner.goldMembership ? this.downgrade(downgrade, owner.id) : this.upgrade(upgrade, owner.id)}
+                            {this.editButton(owner)}
+                        </div>
                     </div>
                 </div>
             </section>

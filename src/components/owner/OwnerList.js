@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form"
 export default class OwnerList extends Component {
     state = {
-        selected: "true"
+        selected: "all"
     }
 
     createDropdownSort() {
@@ -12,7 +12,7 @@ export default class OwnerList extends Component {
             <React.Fragment>
                 <Form.Group controlId="exampleForm.ControlSelect2">
                     <Form.Control as="select" onChange={this.handleSelect}>
-                        <option defaultValue>all owners</option>
+                        <option defaultValue="all">all owners</option>
                         <option value="true">active</option>
                         <option value="false">archived</option>
                     </Form.Control>
@@ -60,7 +60,7 @@ export default class OwnerList extends Component {
                             }
                             const status = owner.isActive.toString()
 
-                            if (status === this.state.selected) {
+                            if (status === this.state.selected||this.state.selected==="all") {
                                 return <div key={owner.id} className="card">
                                     <div className={memberClass}>
                                         <h5 className="card-title">

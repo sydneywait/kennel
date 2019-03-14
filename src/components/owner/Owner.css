@@ -43,6 +43,13 @@ p{
 
 
 }
+
+.button-div{
+    display:flex;
+    flex-direction: column;
+    width: 100px;
+    margin: auto;
+}
 .ownerButton {
     display: flex;
     justify-content: space-evenly;
