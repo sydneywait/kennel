@@ -86,27 +86,19 @@
   "animals": [
     {
       "id": 2,
-      "name": "Steve",
+      "name": "Steve-o",
       "speciesId": 1,
       "employeeId": 4,
-      "image": "/images/placeholder.jpg",
-      "ownerId": 5
+      "ownerId": 5,
+      "image": "/images/placeholder.jpg"
     },
     {
+      "id": 3,
       "name": "Chucky",
-      "ownerId": 8,
       "speciesId": 4,
       "employeeId": 2,
-      "image": "/images/placeholder.jpg",
-      "id": 3
-    },
-    {
-      "name": "Jimmy",
-      "ownerId": 3,
-      "speciesId": 2,
-      "employeeId": 1,
-      "image": "/images/placeholder.jpg",
-      "id": 4
+      "ownerId": 8,
+      "image": "/images/placeholder.jpg"
     },
     {
       "name": "Bob",
@@ -123,6 +115,14 @@
       "employeeId": 5,
       "image": "/images/placeholder.jpg",
       "id": 6
+    },
+    {
+      "name": "Thomas",
+      "ownerId": 1,
+      "speciesId": 5,
+      "employeeId": 1,
+      "image": "/images/placeholder.jpg",
+      "id": 7
     }
   ],
   "species": [

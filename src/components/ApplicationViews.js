@@ -1,22 +1,14 @@
 import { Route, Redirect } from "react-router-dom"
 import React, { Component } from "react"
-import AnimalList from './animal/AnimalList'
-import LocationList from './location/LocationList'
-import EmployeeList from './employee/EmployeeList'
-import OwnerList from './owner/OwnerList'
 import SearchResults from './search/SearchResults'
 import AnimalAPIManager from "../modules/AnimalManager"
 import EmployeeAPIManager from "../modules/EmployeeManager"
 import LocationAPIManager from "../modules/LocationManager"
 import OwnerAPIManager from "../modules/OwnerManager"
-import SpeciesManager from "../modules/SpeciesManager"
-import AnimalDetail from './animal/AnimalDetail'
-import EmployeeDetail from './employee/EmployeeDetail'
-import OwnerDetail from './owner/OwnerDetail'
-import LocationDetail from './location/LocationDetail'
-import AnimalForm from './animal/AnimalForm'
+import ResourceAPIManager from "../modules/ResourceManager"
 import OwnerForm from './owner/OwnerForm'
 import EmployeeForm from './employee/EmployeeForm'
+import AnimalForm from './animal/AnimalForm'
 import Login from './authentication/Login'
 import Logout from './authentication/Logout'
 import Register from './authentication/Register'
@@ -43,15 +35,15 @@ export default class ApplicationViews extends Component {
     componentDidMount() {
         const newState = {}
 
-        AnimalAPIManager.getAllAnimals()
+        ResourceAPIManager.getAllResources("animals")
             .then(animals => newState.animals = animals)
-            .then(EmployeeAPIManager.getAllEmployees)
+            .then(()=>ResourceAPIManager.getAllResources("employees"))
             .then(employees => newState.employees = employees)
-            .then(LocationAPIManager.getAllLocations)
+            .then(()=>ResourceAPIManager.getAllResources("locations"))
             .then(locations => newState.locations = locations)
-            .then(OwnerAPIManager.getAllOwners)
+            .then(()=>ResourceAPIManager.getAllResources("owners"))
             .then(owners => newState.owners = owners)
-            .then(SpeciesManager.getAllSpecies)
+            .then(ResourceAPIManager.getAllResources("species"))
             .then(species => newState.species = species)
             .then(() => this.setState(newState))
 
@@ -63,7 +55,7 @@ export default class ApplicationViews extends Component {
 
     delete = {
         deleteAnimal: (id) => {
-            return AnimalAPIManager.deleteAnimal(id)
+            return ResourceAPIManager.deleteResource(id, "animals")
                 .then(animals => this.setState({
                     animals: animals
 
@@ -71,21 +63,21 @@ export default class ApplicationViews extends Component {
                 )
         },
         deleteLocation: (id) => {
-            return LocationAPIManager.deleteLocation(id)
+            return ResourceAPIManager.deleteResource(id, "locations")
                 .then(locations => this.setState({
                     locations: locations
                 })
                 )
         },
         deleteOwner: (id) => {
-            return OwnerAPIManager.deleteOwner(id)
+            return ResourceAPIManager.deleteResource(id, "owners")
                 .then(owners => this.setState({
                     owners: owners
                 })
                 )
         },
         deleteEmployee: (id) => {
-            return EmployeeAPIManager.deleteEmployee(id)
+            return ResourceAPIManager.deleteResource(id, "employees")
                 .then(employees => this.setState({
                     employees: employees
                 })
@@ -94,22 +86,9 @@ export default class ApplicationViews extends Component {
     }
 
     patch = {
-        // patchAnimal: (id) => {
-        //     AnimalAPIManager.patchAnimal(id)
-        //         .then(animals => this.setState({
-        //             animals: animals
-        //         })
-        //         )
-        // },
-        // patchLocation: (id) => {
-        //     LocationAPIManager.patchLocation(id)
-        //         .then(locations => this.setState({
-        //             locations: locations
-        //         })
-        //         )
-        // },
+
         patchOwner: (patchObject, id) => {
-            return OwnerAPIManager.patchOwner(patchObject, id)
+            return ResourceAPIManager.patchResource(patchObject, id, "owners")
                 .then(owners => this.setState({
                     owners: owners
                 })
@@ -118,8 +97,8 @@ export default class ApplicationViews extends Component {
     }
     add = {
         addAnimal: animalObject => {
-            AnimalAPIManager.addNewAnimal(animalObject)
-                .then(() => AnimalAPIManager.getAllAnimals())
+            ResourceAPIManager.addNewResource(animalObject, "animals")
+                .then(() => ResourceAPIManager.getAllResources("animals"))
                 .then(animals =>
                     this.setState({
                         animals: animals
@@ -128,17 +107,17 @@ export default class ApplicationViews extends Component {
         },
 
         addOwner: ownerObject => {
-            OwnerAPIManager.addNewOwner(ownerObject)
-                .then(() => OwnerAPIManager.getAllOwners())
+            ResourceAPIManager.addNewResource(ownerObject, "owners")
+                .then(() => ResourceAPIManager.getAllResources("owners"))
                 .then(owners =>
                     this.setState({
                         owners: owners
                     })
                 )
         },
-        addEmployee: EmployeeObject => {
-            EmployeeAPIManager.addNewEmployee(EmployeeObject)
-                .then(() => EmployeeAPIManager.getAllEmployees())
+        addEmployee: employeeObject => {
+            ResourceAPIManager.addNewResource(employeeObject, "employees")
+                .then(() => ResourceAPIManager.getAllResources("employees"))
                 .then(employees =>
                     this.setState({
                         employees: employees
@@ -148,19 +127,13 @@ export default class ApplicationViews extends Component {
 
     }
 
-    // patchEmployee: (id) => {
-    //     EmployeeAPIManager.patchEmployee(id)
-    //         .then(employees => this.setState({
-    //             employees: employees
-    //         })
-    //         )
-    // }
+
 
 
     edit ={
         editAnimal: (object) => {
-            AnimalAPIManager.editAnimal(object)
-            .then(() => AnimalAPIManager.getAllAnimals())
+            ResourceAPIManager.editResource(object, "animals")
+            .then(() => ResourceAPIManager.getAllResources("animals"))
             .then(animals => {
               this.setState({
                 animals: animals
@@ -169,8 +142,8 @@ export default class ApplicationViews extends Component {
         },
 
         editOwner: (object) => {
-            OwnerAPIManager.editOwner(object)
-            .then(() => OwnerAPIManager.getAllOwners())
+            ResourceAPIManager.editResource(object, "owners")
+            .then(() => ResourceAPIManager.getAllResources("owners"))
             .then(owners => {
               this.setState({
                 owners: owners
@@ -178,8 +151,8 @@ export default class ApplicationViews extends Component {
             })
         },
         editEmployee: (object) => {
-            EmployeeAPIManager.editEmployee(object)
-            .then(() => EmployeeAPIManager.getAllEmployees())
+            ResourceAPIManager.editResource(object, "employees")
+            .then(() => ResourceAPIManager.getAllResources("employees"))
             .then(employees => {
               this.setState({
                 employees: employees
@@ -206,13 +179,14 @@ export default class ApplicationViews extends Component {
 
                 }} />
                 <Route path="/locations/:locationId(\d+)" render={(props) => {
-                    if (this.isAuthenticated()) {
-                        return <LocationDetail {...props}
-                            locations={this.state.locations}
-                            deleteLocation={this.delete.deleteLocation}
-                            employees={this.state.employees}
-                            animals={this.state.animals} />
-                    }
+
+                        if (this.isAuthenticated()) {
+                            return <ResourceDetail {...props}
+                                resource={this.state.locations}
+                                resourceName="location"
+                                route ="locations"
+                                deleteResource={this.delete.deleteLocation} />
+                        }
                     else {
                         return <Redirect to="/login" />
                     }
@@ -273,10 +247,11 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
-                        return <EmployeeDetail {...props}
-                            employees={this.state.employees}
-                            animals={this.state.animals}
-                            deleteEmployee={this.delete.deleteEmployee} />
+                        return <ResourceDetail {...props}
+                            resource={this.state.employees}
+                            resourceName="employee"
+                            route ="employees"
+                            deleteResource={this.delete.deleteEmployee} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
@@ -310,10 +285,11 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route exact path="/owners/:ownerId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
-                        return <OwnerDetail {...props}
-                            owners={this.state.owners}
-                            deleteOwner={this.delete.deleteOwner}
-                            patchOwner={this.patch.patchOwner} />
+                        return <ResourceDetail {...props}
+                            resource={this.state.owners}
+                            resourceName="owner"
+                            route ="owners"
+                            deleteResource={this.delete.deleteOwners} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />

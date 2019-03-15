@@ -28,7 +28,8 @@ export default class AnimalEditForm extends Component {
           name: this.state.name,
           speciesId: parseInt(this.state.speciesId),
           employeeId: parseInt(this.state.employeeId),
-          ownerId: parseInt(this.state.ownerId)
+          ownerId: parseInt(this.state.ownerId),
+          image: "/images/placeholder.jpg"
         };
 
     this.props.editAnimal(editedAnimal)
