@@ -1,10 +1,6 @@
 import { Route, Redirect } from "react-router-dom"
 import React, { Component } from "react"
 import SearchResults from './search/SearchResults'
-import AnimalAPIManager from "../modules/AnimalManager"
-import EmployeeAPIManager from "../modules/EmployeeManager"
-import LocationAPIManager from "../modules/LocationManager"
-import OwnerAPIManager from "../modules/OwnerManager"
 import ResourceAPIManager from "../modules/ResourceManager"
 import OwnerForm from './owner/OwnerForm'
 import EmployeeForm from './employee/EmployeeForm'
@@ -37,156 +33,81 @@ export default class ApplicationViews extends Component {
 
         ResourceAPIManager.getAllResources("animals")
             .then(animals => newState.animals = animals)
-            .then(()=>ResourceAPIManager.getAllResources("employees"))
+            .then(() => ResourceAPIManager.getAllResources("employees"))
             .then(employees => newState.employees = employees)
-            .then(()=>ResourceAPIManager.getAllResources("locations"))
+            .then(() => ResourceAPIManager.getAllResources("locations"))
             .then(locations => newState.locations = locations)
-            .then(()=>ResourceAPIManager.getAllResources("owners"))
+            .then(() => ResourceAPIManager.getAllResources("owners"))
             .then(owners => newState.owners = owners)
             .then(ResourceAPIManager.getAllResources("species"))
             .then(species => newState.species = species)
             .then(() => this.setState(newState))
-
-        // create an array for pets with info?
     }
 
 
 
 
-    delete = {
-        deleteAnimal: (id) => {
-            return ResourceAPIManager.deleteResource(id, "animals")
-                .then(animals => this.setState({
-                    animals: animals
 
-                })
-                )
-        },
-        deleteLocation: (id) => {
-            return ResourceAPIManager.deleteResource(id, "locations")
-                .then(locations => this.setState({
-                    locations: locations
-                })
-                )
-        },
-        deleteOwner: (id) => {
-            return ResourceAPIManager.deleteResource(id, "owners")
-                .then(owners => this.setState({
-                    owners: owners
-                })
-                )
-        },
-        deleteEmployee: (id) => {
-            return ResourceAPIManager.deleteResource(id, "employees")
-                .then(employees => this.setState({
-                    employees: employees
-                })
-                )
-        }
-    }
-
-    patch = {
-
-        patchOwner: (patchObject, id) => {
-            return ResourceAPIManager.patchResource(patchObject, id, "owners")
-                .then(owners => this.setState({
-                    owners: owners
-                })
-                )
-        }
-    }
-    add = {
-        addAnimal: animalObject => {
-            ResourceAPIManager.addNewResource(animalObject, "animals")
-                .then(() => ResourceAPIManager.getAllResources("animals"))
-                .then(animals =>
-                    this.setState({
-                        animals: animals
-                    })
-                )
-        },
-
-        addOwner: ownerObject => {
-            ResourceAPIManager.addNewResource(ownerObject, "owners")
-                .then(() => ResourceAPIManager.getAllResources("owners"))
-                .then(owners =>
-                    this.setState({
-                        owners: owners
-                    })
-                )
-        },
-        addEmployee: employeeObject => {
-            ResourceAPIManager.addNewResource(employeeObject, "employees")
-                .then(() => ResourceAPIManager.getAllResources("employees"))
-                .then(employees =>
-                    this.setState({
-                        employees: employees
-                    })
-                )
-        }
-
-    }
-
-
-
-
-    edit ={
-        editAnimal: (object) => {
-            ResourceAPIManager.editResource(object, "animals")
-            .then(() => ResourceAPIManager.getAllResources("animals"))
-            .then(animals => {
-              this.setState({
+    deleteResource = (id, route) => {
+        return ResourceAPIManager.deleteResource(id, route)
+            .then(animals => this.setState({
                 animals: animals
-                })
             })
-        },
-
-        editOwner: (object) => {
-            ResourceAPIManager.editResource(object, "owners")
-            .then(() => ResourceAPIManager.getAllResources("owners"))
-            .then(owners => {
-              this.setState({
-                owners: owners
-                })
-            })
-        },
-        editEmployee: (object) => {
-            ResourceAPIManager.editResource(object, "employees")
-            .then(() => ResourceAPIManager.getAllResources("employees"))
-            .then(employees => {
-              this.setState({
-                employees: employees
-                })
-            })
-        },
-
+            )
     }
+    patchResource = (patchObject, id, route) => {
+        return ResourceAPIManager.patchResource(patchObject, id, route)
+            .then(owners => this.setState({
+                owners: owners
+            })
+            )
+    }
+    addResource = (resourceObject, route) => {
+        ResourceAPIManager.addNewResource(resourceObject, route)
+            .then(() => ResourceAPIManager.getAllResources(route))
+            .then(animals =>
+                this.setState({
+                    animals: animals
+                })
+            )
+    }
+    editResource = (object, route) => {
+        ResourceAPIManager.editResource(object, route)
+            .then(() => ResourceAPIManager.getAllResources(route))
+            .then(animals => {
+                this.setState({
+                    animals: animals
+                })
+            })
+    }
+
+
 
     render() {
         return (
             <React.Fragment >
                 <Route exact path="/" render={(props) => {
-                     if (this.isAuthenticated()) {
+                    if (this.isAuthenticated()) {
                         return <ResourceList {...props}
                             resource={this.state.locations}
                             ResourceName="Location"
                             resourceNames="locations"
-                            />
+                        />
                     }
                     else {
                         return <Redirect to="/login" />
                     }
 
                 }} />
-                <Route path="/locations/:locationId(\d+)" render={(props) => {
+                <Route path="/locations/:resourceId(\d+)" render={(props) => {
 
-                        if (this.isAuthenticated()) {
-                            return <ResourceDetail {...props}
-                                resource={this.state.locations}
-                                resourceName="location"
-                                route ="locations"
-                                deleteResource={this.delete.deleteLocation} />
-                        }
+                    if (this.isAuthenticated()) {
+                        return <ResourceDetail {...props}
+                            resource={this.state.locations}
+                            resourceName="location"
+                            route=""
+                            deleteResource={this.delete.deleteLocation} />
+                    }
                     else {
                         return <Redirect to="/login" />
                     }
@@ -199,7 +120,7 @@ export default class ApplicationViews extends Component {
                             ResourceName="Animal"
                             resourceNames="animals"
 
-                            species={this.state.species}/>
+                            species={this.state.species} />
                     }
 
                     else { return <Redirect to="/login" /> };
@@ -216,52 +137,52 @@ export default class ApplicationViews extends Component {
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
-                <Route exact path="/animals/:animalId(\d+)" render={(props) => {
+                <Route exact path="/animals/:resourceId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <ResourceDetail {...props}
                             resource={this.state.animals}
                             resourceName="animal"
-                            route ="animals"
-                            deleteResource={this.delete.deleteAnimal} />
+                            route="animals"
+                            deleteResource={this.deleteResource} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
                 <Route
                     path="/animals/:animalId(\d+)/edit" render={props => {
                         return <AnimalEditForm {...props}
-                        employees={this.state.employees}
-                        editAnimal={this.edit.editAnimal}
-                        species ={this.state.species}
-                        owners={this.state.owners}/>
+                            employees={this.state.employees}
+                            editAnimal={this.edit.editAnimal}
+                            species={this.state.species}
+                            owners={this.state.owners} />
                     }}
                 />
                 <Route exact path="/employees" render={(props) => {
-                     if (this.isAuthenticated()) {
+                    if (this.isAuthenticated()) {
                         return <ResourceList {...props}
                             resource={this.state.employees}
                             ResourceName="Employee"
                             resourceNames="employees"
-                            />
+                        />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
-                <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
+                <Route exact path="/employees/:resourceId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <ResourceDetail {...props}
                             resource={this.state.employees}
                             resourceName="employee"
-                            route ="employees"
+                            route="employees"
                             deleteResource={this.delete.deleteEmployee} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
                 <Route path="/employees/:employeeId(\d+)/edit" render={props => {
-                        return <EmployeeEditForm {...props}
+                    return <EmployeeEditForm {...props}
                         employees={this.state.employees}
                         editEmployee={this.edit.editEmployee}
                         locations={this.state.locations}
-                        />
-                    }}/>
+                    />
+                }} />
                 <Route path="/employees/new" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <EmployeeForm {...props}
@@ -278,27 +199,27 @@ export default class ApplicationViews extends Component {
                             resource={this.state.owners}
                             ResourceName="Owner"
                             resourceNames="owners"
-                            />
+                        />
                     }
                     else { return <Redirect to="/login" /> }
 
                 }} />
-                <Route exact path="/owners/:ownerId(\d+)" render={(props) => {
+                <Route exact path="/owners/:resourceId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <ResourceDetail {...props}
                             resource={this.state.owners}
                             resourceName="owner"
-                            route ="owners"
-                            deleteResource={this.delete.deleteOwners} />
+                            route="owners"
+                            deleteResource={this.delete.deleteOwner} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
                 <Route path="/owners/:ownerId(\d+)/edit" render={props => {
-                        return <OwnerEditForm {...props}
+                    return <OwnerEditForm {...props}
                         owners={this.state.owners}
                         editOwner={this.edit.editOwner}
-                        />
-                    }}/>
+                    />
+                }} />
                 <Route path="/owners/new" render={(props) => {
                     if (this.isAuthenticated()) {
                         return <OwnerForm {...props}

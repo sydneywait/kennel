@@ -1,6 +1,9 @@
 import React, { Component } from "react"
 import EmployeeManager from "../../modules/EmployeeManager"
 
+
+// this.props.match (route)
+// pass a boolean on edit or not
 export default class EmployeeEditForm extends Component {
     // Set initial state
     state = {
@@ -22,7 +25,7 @@ export default class EmployeeEditForm extends Component {
         evt.preventDefault()
 
             const editedEmployee = {
-
+// this line is added
                 id: this.props.match.params.employeeId,
                 name: this.state.name,
                 image: this.state.image,
@@ -32,12 +35,12 @@ export default class EmployeeEditForm extends Component {
 
 
             };
-
+// this line is edit instead of add
             this.props.editEmployee(editedEmployee)
             this.props.history.push("/employees")
         }
 
-
+//this is optional on form
     componentDidMount() {
         EmployeeManager.getSingleEmployee(this.props.match.params.employeeId)
             .then(employee => {
@@ -63,6 +66,7 @@ export default class EmployeeEditForm extends Component {
                             className="form-control"
                             onChange={this.handleFieldChange}
                             id="name"
+                            //populated value instead of placeholder
                             value={this.state.name}
                         />
                     </div>
@@ -73,6 +77,7 @@ export default class EmployeeEditForm extends Component {
                             name="location"
                             id="location"
                             onChange={this.handleFieldChange}
+                            // value instead of placeholder
                             value={this.state.locationId}
                         >
                             <option value="">Select a Location</option>
@@ -90,6 +95,7 @@ export default class EmployeeEditForm extends Component {
                             name="image"
                             id="image"
                             onChange={this.handleFieldChange}
+                            //value instead of placeholder
                             value={this.state.image}
                         >
 
@@ -110,6 +116,7 @@ export default class EmployeeEditForm extends Component {
                             className="form-control"
                             onChange={this.handleFieldChange}
                             id="email"
+                            // value instead of placeholder
                             value={this.state.email}
                         />
                     </div>
@@ -133,6 +140,7 @@ export default class EmployeeEditForm extends Component {
 
                     <button
                         type="submit"
+                        // update instead of construct new
                         onClick={this.updateExistingEmployee}
                         className="btn btn-primary"
                     >

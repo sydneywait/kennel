@@ -7,9 +7,9 @@ import "./Resource.css"
 export default class ResourceDetail extends Component {
 
     render() {
-        const resourceId = `${this.props.resourceName}Id`
-        console.log(resourceId)
-        const resource = this.props.resource.find(a => a.id === parseInt(this.props.match.params[resourceId])) || {}
+
+
+        const resource = this.props.resource.find(a => a.id === parseInt(this.props.match.params.resourceId)) || {}
 console.log(resource)
 
         return (
@@ -29,7 +29,7 @@ console.log(resource)
                             <button className="btn btn-danger"
                                 type="button"
                                 onClick={() => {
-                                    this.props.deleteResource(resource.id)
+                                    this.props.deleteResource(resource.id, this.props.route)
                                     this.props.history.push(`/${this.props.route}`)
                                 }}
                             >Delete </button>

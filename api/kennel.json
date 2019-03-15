@@ -1,69 +1,6 @@
 {
-  "employees": [
-    {
-      "id": 1,
-      "name": "Jessica Younker",
-      "image": "/images/people/farmerLady.png",
-      "email": "jessica@kennel.com",
-      "password": "jessica",
-      "locationId": 1
-    },
-    {
-      "id": 2,
-      "name": "Jordan Nelson",
-      "image": "/images/people/maleEmployee.png",
-      "email": "jordan@kennel.com",
-      "password": "jordan",
-      "locationId": 1
-    },
-    {
-      "id": 3,
-      "name": "Zoe LeBlanc",
-      "image": "/images/people/vestLady.png",
-      "email": "zoe@kennel.com",
-      "password": "zoe",
-      "locationId": 2
-    },
-    {
-      "id": 4,
-      "name": "Blaise Roberts",
-      "image": "/images/people/beardPerson.png",
-      "email": "blaise@kennel.com",
-      "password": "blaise",
-      "locationId": 1
-    },
-    {
-      "name": "Gavin Beverage",
-      "image": "/images/people/maleEmployee.png",
-      "email": "gavin@kennel.com",
-      "password": "gavin",
-      "locationId": 2,
-      "id": 5
-    },
-    {
-      "name": "Sydney Wait",
-      "email": "sydney@kennel.com",
-      "image": "/images/people/hipLady.png",
-      "password": "sydney",
-      "locationId": 3,
-      "id": 6
-    },
-    {
-      "name": "Jordan Castelloe",
-      "email": "jordan@kennel.com",
-      "image": "/images/people/hardHatguy.png",
-      "password": "jordan",
-      "locationId": 4,
-      "id": 7
-    }
-  ],
+  "employees": [],
   "locations": [
-    {
-      "id": 1,
-      "name": "Nashville East",
-      "address": "10101 Binary Court",
-      "image": "/images/locations/east.jpg"
-    },
     {
       "id": 2,
       "name": "Nashville North",
@@ -85,45 +22,46 @@
   ],
   "animals": [
     {
+      "id": 1,
+      "name": "Oscar",
+      "ownerId": "1",
+      "speciesId": "1",
+      "image": "/images/animals/dog.png",
+      "isActive": true
+  },
+  {
       "id": 2,
-      "name": "Steve-o",
-      "speciesId": 1,
-      "employeeId": 4,
-      "ownerId": 5,
-      "image": "/images/placeholder.jpg"
-    },
-    {
+      "name": "Henny",
+      "ownerId": "2",
+      "speciesId": "3",
+      "image": "/images/animals/chicken.png",
+      "isActive": true
+  },
+  {
       "id": 3,
-      "name": "Chucky",
-      "speciesId": 4,
-      "employeeId": 2,
-      "ownerId": 8,
-      "image": "/images/placeholder.jpg"
-    },
-    {
-      "name": "Bob",
-      "ownerId": 7,
-      "speciesId": 3,
-      "employeeId": 1,
-      "image": "/images/placeholder.jpg",
-      "id": 5
-    },
-    {
-      "name": "Goofy",
-      "ownerId": 2,
-      "speciesId": 2,
-      "employeeId": 5,
-      "image": "/images/placeholder.jpg",
-      "id": 6
-    },
-    {
-      "name": "Thomas",
-      "ownerId": 1,
-      "speciesId": 5,
-      "employeeId": 1,
-      "image": "/images/placeholder.jpg",
-      "id": 7
-    }
+      "name": "Peanut",
+      "ownerId": "3",
+      "speciesId": "4",
+      "image": "/images/animals/hamster.png",
+      "isActive": true
+  },
+  {
+      "id": 4,
+      "name": "Polly",
+      "ownerId": "4",
+      "speciesId": "3",
+      "image": "/images/animals/horse.png",
+      "isActive": true
+  },
+  {
+      "id": 5,
+      "name": "Charlie",
+      "ownerId": "1",
+      "speciesId": "1",
+      "image":"/images/animals/snake.png",
+      "isActive": true
+  }
+
   ],
   "species": [
     {
@@ -160,7 +98,7 @@
   "owners": [
     {
       "id": 1,
-      "name": "Ryan Tanay",
+      "name": "Ryan Tanays",
       "phone": "304-123-4567",
       "image": "/images/people/boy.png",
       "goldMembership": true,
@@ -168,7 +106,7 @@
     },
     {
       "id": 2,
-      "name": "Emma Beaton",
+      "name": "Emma Beatons",
       "phone": "304-123-4567",
       "image": "/images/people/girl.png",
       "goldMembership": true,
