@@ -25,6 +25,7 @@ import AnimalEditForm from './animal/AnimalEditForm'
 import OwnerEditForm from './owner/OwnerEditForm'
 import EmployeeEditForm from './employee/EmployeeEditForm'
 import ResourceList from './generics/ResourceList'
+import ResourceDetail from './generics/ResourceDetail'
 export default class ApplicationViews extends Component {
 
 
@@ -223,6 +224,7 @@ export default class ApplicationViews extends Component {
                             resource={this.state.animals}
                             ResourceName="Animal"
                             resourceNames="animals"
+
                             species={this.state.species}/>
                     }
 
@@ -242,11 +244,11 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route exact path="/animals/:animalId(\d+)" render={(props) => {
                     if (this.isAuthenticated()) {
-                        return <AnimalDetail {...props}
-                            animals={this.state.animals}
-                            species={this.state.species}
-                            owners={this.state.owners}
-                            deleteAnimal={this.delete.deleteAnimal} />
+                        return <ResourceDetail {...props}
+                            resource={this.state.animals}
+                            resourceName="animal"
+                            route ="animals"
+                            deleteResource={this.delete.deleteAnimal} />
                     }
                     else { return <Redirect to="/login" /> }
                 }} />
