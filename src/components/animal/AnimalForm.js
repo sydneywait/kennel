@@ -36,7 +36,8 @@ export default class AnimalForm extends Component {
                 // Make sure the Ids are saved to the database as a number since it is a foreign key.
                 ownerId: parseInt(this.state.ownerId),
                 speciesId: parseInt(this.state.speciesId),
-                employeeId: parseInt(this.state.employeeId)
+                employeeId: parseInt(this.state.employeeId),
+                image:"/images/placeholder.jpg"
 
             };
 
@@ -66,6 +67,7 @@ export default class AnimalForm extends Component {
                         <label htmlFor="owner"></label>
                         <select
                             defaultValue=""
+                            required
                             name="owner"
                             id="ownerId"
                             onChange={this.handleFieldChange}
@@ -82,6 +84,7 @@ export default class AnimalForm extends Component {
                         <label htmlFor="species"></label>
                         <select
                             defaultValue=""
+                            required
                             name="species"
                             id="speciesId"
                             onChange={this.handleFieldChange}
@@ -98,11 +101,12 @@ export default class AnimalForm extends Component {
                         <label htmlFor="employee">Assign to caretaker</label>{"\n"}
                         <select
                             defaultValue=""
+                            required
                             name="employee"
                             id="employeeId"
                             onChange={this.handleFieldChange}
                         >
-                            <option value="">Select an employee</option>
+                            <option value="" required>Select an employee</option>
                             {this.props.employees.map(e => (
                                 <option key={e.id} id={e.id} value={e.id}>
                                     {e.name}

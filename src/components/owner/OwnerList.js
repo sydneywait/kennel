@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./Owner.css"
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form"
+import ResourceCard from "../generics/ResourceCard"
 export default class OwnerList extends Component {
     state = {
         selected: "all"
@@ -31,7 +32,7 @@ export default class OwnerList extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className ="ownerHeader">
+                <div className="ownerHeader">
                     <div className="ownerButton">
                         <button type="button"
                             className="btn btn-success"
@@ -42,42 +43,40 @@ export default class OwnerList extends Component {
                             Add New Owner
                     </button>
                     </div>
-                    <div className ="dropDown">{this.createDropdownSort()}</div>
+                    <div className="dropDown">{this.createDropdownSort()}</div>
                 </div>
                 <section className="owners">
 
                     {
-                        this.props.owners.map(owner => {
-                            let memberClass = ""
-                            if (owner.goldMembership === true && owner.isActive === true) {
-                                memberClass = "card-body gold"
-                            }
-                            else if (owner.isActive === false) {
-                                memberClass = "card-body inactive"
-                            }
-                            else {
-                                memberClass = "card-body"
-                            }
-                            const status = owner.isActive.toString()
-
-                            if (status === this.state.selected||this.state.selected==="all") {
-                                return <div key={owner.id} className="card">
-                                    <div className={memberClass}>
-                                        <h5 className="card-title">
-                                            <img src={window.location.origin + owner.image} className="icon--owner" />
-                                            <p>{owner.name}</p>
-                                            {owner.isActive ? <h6>active member</h6> : <h6>inactive</h6>}
-                                            <Link className="nav-link" to={`/owners/${owner.id}`}>Details</Link>
-
-                                        </h5>
-                                    </div>
-                                </div>
-                            }
-                        }
+                        this.props.owners.map(owner =>
+                            <ResourceCard
+                                key={owner.id}
+                                resource={owner} route="owners" {...this.props} />
                         )
+                        // this.props.owners.map(owner => {
+                        //     let memberClass = ""
+                        //     if (owner.goldMembership === true && owner.isActive === true) {
+                        //         memberClass = "card-body gold"
+                        //     }
+                        //     else if (owner.isActive === false) {
+                        //         memberClass = "card-body inactive"
+                        //     }
+                        //     else {
+                        //         memberClass = "card-body"
+                        //     }
+                        //     const status = owner.isActive.toString()
+
+                        //     if (status === this.state.selected||this.state.selected==="all") {
+                        //          {
+
+
+                    // }
+                    //         }
+                    //     }
+                    //     )
                     }
                 </section>
             </React.Fragment>
-        )
-    }
+                )
+            }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./Employee.css"
-import EmployeeCard from "./EmployeeCard"
+import ResourceCard from "../generics/ResourceCard"
 
 
 export default class EmployeeList extends Component {
@@ -22,9 +22,9 @@ export default class EmployeeList extends Component {
                 </div>
                 <div className="employee-container">
                     {this.props.employees.map(employee =>
-                                    <EmployeeCard
+                                    <ResourceCard
                         key={employee.id}
-                        employee={employee} {...this.props} />
+                        resource={employee} route="employees" {...this.props} />
                     )
 
                     }</div>

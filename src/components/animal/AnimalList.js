@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import "./Animal.css"
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form"
-import AnimalCard from "./AnimalCard"
+import ResourceCard from "../generics/ResourceCard"
 
 export default class AnimalList extends Component {
     state = {
@@ -15,13 +15,13 @@ export default class AnimalList extends Component {
 
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Control as="select" onChange={this.handleSelect}>
+                        <option value="">Select a species</option>
                         <option selected="selected">all</option>
-                        <option>cat</option>
-                        <option>dog</option>
-                        <option>chicken</option>
-                        <option>hamster</option>
-                        <option>horse</option>
-                        <option>snake</option>
+                            {this.props.species.map(e => (
+                                <option key={e.id} id={e.id} value={e.id}>
+                                    {e.name}
+                                </option>
+                            ))}
                     </Form.Control>
                 </Form.Group>
 
@@ -54,32 +54,6 @@ export default class AnimalList extends Component {
         stateToChange[evt.target.id] = evt.target.value;
         this.setState(stateToChange);
     };
-
-    // createAnimalCard(animal) {
-    //     let cardClass = ""
-    //     if (animal.owner.isActive === true) {
-    //         cardClass = "card-body active"
-    //     }
-    //     else {
-    //         cardClass = "card-body inactive"
-    //     }
-    //     return (
-    //         <React.Fragment>
-
-    //             <div key={animal.id} className="card">
-    //                 <div className={cardClass}>
-    //                     <h5 className="card-title">
-    //                         <img src={window.location.origin + animal.species.image} className="icon--animal" alt="error" />
-    //                         <p>{animal.name}</p>
-    //                         <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
-
-    //                     </h5>
-    //                 </div>
-    //             </div>
-
-    //         </React.Fragment>
-    //     )
-    // }
 
 
     handleSelect = (evt) => {
@@ -120,41 +94,33 @@ export default class AnimalList extends Component {
                             const species = animal.species.name
                             if (this.state.selected === "all" && status === this.state.active) {
 
-                                // return <div>{this.createAnimalCard(animal)}
-                                // </div>
-                                return this.props.animals.map(animal =>
-                                    <AnimalCard
+                                return <ResourceCard
                                     key={animal.id}
-                                    animal={animal} {...this.props} />
-                                )
+                                    resource={animal} {...this.props} />
                             }
                             if (this.state.selected === species && status === this.state.active) {
 
-                                return this.props.animals.map(animal =>
-                                    <AnimalCard
+                                return <ResourceCard
                                     key={animal.id}
-                                    animal={animal} {...this.props} />
-                                )
+                                    resource={animal} {...this.props} />
                             }
                             if (this.state.selected === "all" && this.state.active === "all") {
-                                return this.props.animals.map(animal =>
-                                    <AnimalCard
+                                return <ResourceCard
                                     key={animal.id}
-                                    animal={animal} {...this.props} />
-                                )
+                                    resource={animal} {...this.props} />
+
                             }
                             if (this.state.selected === species && this.state.active === "all")
-                            return this.props.animals.map(animal =>
-                                <AnimalCard
-                                key={animal.id}
-                                animal={animal} {...this.props} />
-                            )
+                                return <ResourceCard
+                                    key={animal.id}
+                                    resource={animal} {...this.props} />
 
                             else {
 
                             }
 
-                        })}
+                        })
+                    }
                 </section>
             </React.Fragment>
         )

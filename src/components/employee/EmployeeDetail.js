@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./Employee.css"
 import AnimalCard from "../animal/AnimalCard"
+import ResourceCard from "../generics/ResourceCard"
 
 
 
@@ -21,7 +22,7 @@ export default class EmployeeDetail extends Component {
                 <div key={employee.id} className="card">
                     <div className="card-body">
                         <h4 className="card-title">
-                            <img src={window.location.origin + employee.image} className="icon--employee" />
+                            <img src={window.location.origin + employee.image} className="icon--resource" />
 
                         </h4>
                         <h5 className="card-title">{employee.name}</h5>
@@ -47,9 +48,9 @@ export default class EmployeeDetail extends Component {
                         </div>
                     </div>
                 </div>
-                <div><h2>Animals in care:</h2>{this.props.animals.filter(animal => animal.employeeId === employee.id).map(animalMatch => <AnimalCard
+                <div><h2>Animals in care:</h2>{this.props.animals.filter(animal => animal.employeeId === employee.id).map(animalMatch => <ResourceCard
                                             key={animalMatch.id}
-                                            animal={animalMatch} {...this.props} />)}</div>
+                                            resource={animalMatch} route="animals" {...this.props} />)}</div>
             </section>
         )
     }
