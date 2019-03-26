@@ -24,6 +24,8 @@ import Giphy from './authentication/Giphy'
 import AnimalEditForm from './animal/AnimalEditForm'
 import OwnerEditForm from './owner/OwnerEditForm'
 import EmployeeEditForm from './employee/EmployeeEditForm'
+import Callback from './authentication/Callback'
+import Auth0Client from "./authentication/Auth"
 export default class ApplicationViews extends Component {
 
 
@@ -155,34 +157,34 @@ export default class ApplicationViews extends Component {
     // }
 
 
-    edit ={
+    edit = {
         editAnimal: (object) => {
             AnimalAPIManager.editAnimal(object)
-            .then(() => AnimalAPIManager.getAllAnimals())
-            .then(animals => {
-              this.setState({
-                animals: animals
+                .then(() => AnimalAPIManager.getAllAnimals())
+                .then(animals => {
+                    this.setState({
+                        animals: animals
+                    })
                 })
-            })
         },
 
         editOwner: (object) => {
             OwnerAPIManager.editOwner(object)
-            .then(() => OwnerAPIManager.getAllOwners())
-            .then(owners => {
-              this.setState({
-                owners: owners
+                .then(() => OwnerAPIManager.getAllOwners())
+                .then(owners => {
+                    this.setState({
+                        owners: owners
+                    })
                 })
-            })
         },
         editEmployee: (object) => {
             EmployeeAPIManager.editEmployee(object)
-            .then(() => EmployeeAPIManager.getAllEmployees())
-            .then(employees => {
-              this.setState({
-                employees: employees
+                .then(() => EmployeeAPIManager.getAllEmployees())
+                .then(employees => {
+                    this.setState({
+                        employees: employees
+                    })
                 })
-            })
         },
 
     }
@@ -190,19 +192,21 @@ export default class ApplicationViews extends Component {
     render() {
         return (
             <React.Fragment >
+                <Route exact path="/callback" component={Callback} />
                 <Route exact path="/" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <LocationList {...props}
                             locations={this.state.locations}
                             deleteLocation={this.delete.deleteLocation} />
                     }
                     else {
-                        return <Redirect to="/login" />
+                        Auth0Client.signIn();
+                        return null;
                     }
 
                 }} />
                 <Route path="/locations/:locationId(\d+)" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <LocationDetail {...props}
                             locations={this.state.locations}
                             deleteLocation={this.delete.deleteLocation}
@@ -210,20 +214,24 @@ export default class ApplicationViews extends Component {
                             animals={this.state.animals} />
                     }
                     else {
-                        return <Redirect to="/login" />
+                        Auth0Client.signIn();
+                        return null;
                     }
                 }} />
                 <Route exact path="/animals" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <AnimalList {...props}
                             animals={this.state.animals} />
                     }
 
-                    else { return <Redirect to="/login" /> };
+                    else {
+                        Auth0Client.signIn();
+                        return null;  };
 
-                }} />
+                    }
+                } />
                 <Route path="/animals/new" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <AnimalForm {...props}
                             addAnimal={this.add.addAnimal}
                             employees={this.state.employees}
@@ -231,65 +239,80 @@ export default class ApplicationViews extends Component {
                             species={this.state.species}
                         />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route exact path="/animals/:animalId(\d+)" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <AnimalDetail {...props}
                             animals={this.state.animals}
                             species={this.state.species}
                             owners={this.state.owners}
                             deleteAnimal={this.delete.deleteAnimal} />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route
                     path="/animals/:animalId(\d+)/edit" render={props => {
                         return <AnimalEditForm {...props}
-                        employees={this.state.employees}
-                        editAnimal={this.edit.editAnimal}
-                        species ={this.state.species}
-                        owners={this.state.owners}/>
+                            employees={this.state.employees}
+                            editAnimal={this.edit.editAnimal}
+                            species={this.state.species}
+                            owners={this.state.owners} />
                     }}
                 />
                 <Route exact path="/employees" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <EmployeeList {...props}
                             employees={this.state.employees}
                             animals={this.state.animals}
                             locations={this.state.locations}
                             deleteEmployee={this.delete.deleteEmployee} />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <EmployeeDetail {...props}
                             employees={this.state.employees}
                             animals={this.state.animals}
                             deleteEmployee={this.delete.deleteEmployee} />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route path="/employees/:employeeId(\d+)/edit" render={props => {
-                        return <EmployeeEditForm {...props}
+                    return <EmployeeEditForm {...props}
                         employees={this.state.employees}
                         editEmployee={this.edit.editEmployee}
                         locations={this.state.locations}
-                        />
-                    }}/>
+                    />
+                }} />
                 <Route path="/employees/new" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <EmployeeForm {...props}
                             employees={this.state.employees}
                             addEmployee={this.add.addEmployee}
                             locations={this.state.locations}
                         />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route exact path="/owners" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <OwnerList
                             {...props}
                             owners={this.state.owners}
@@ -298,40 +321,52 @@ export default class ApplicationViews extends Component {
                             patchOwner={this.patch.patchOwner
                             } />
                     }
-                    else { return <Redirect to="/login" /> }
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
 
-                }} />
+                    }
+                } />
                 <Route exact path="/owners/:ownerId(\d+)" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <OwnerDetail {...props}
                             owners={this.state.owners}
                             deleteOwner={this.delete.deleteOwner}
                             patchOwner={this.patch.patchOwner} />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route path="/owners/:ownerId(\d+)/edit" render={props => {
-                        return <OwnerEditForm {...props}
+                    return <OwnerEditForm {...props}
                         owners={this.state.owners}
                         editOwner={this.edit.editOwner}
-                        />
-                    }}/>
+                    />
+                }} />
                 <Route path="/owners/new" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <OwnerForm {...props}
                             owners={this.state.owners}
                             addOwner={this.add.addOwner}
                         />
                     }
-                    else { return <Redirect to="/login" /> }
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
 
-                }} />
+                    }
+                } />
                 <Route path="/search" render={(props) => {
-                    if (this.isAuthenticated()) {
+                    if (Auth0Client.isAuthenticated()) {
                         return <SearchResults {...props} />
                     }
-                    else { return <Redirect to="/login" /> }
-                }} />
+                    else {
+                        Auth0Client.signIn();
+                        return null;  }
+                    }
+                } />
                 <Route path="/login" render={(props) => {
                     return <Login {...props}
                         employees={this.state.employees} />

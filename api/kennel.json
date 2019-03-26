@@ -1,60 +1,14 @@
 {
   "employees": [
     {
-      "id": 1,
-      "name": "Jessica Younker",
-      "image": "/images/people/farmerLady.png",
-      "email": "jessica@kennel.com",
-      "password": "jessica",
-      "locationId": 1
+      "aud": "auth0|5c9a6e4c87e8aa0f7765dd61",
+      "name": "sydneyroo",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Jordan Nelson",
-      "image": "/images/people/maleEmployee.png",
-      "email": "jordan@kennel.com",
-      "password": "jordan",
-      "locationId": 1
-    },
-    {
-      "id": 3,
-      "name": "Zoe LeBlanc",
-      "image": "/images/people/vestLady.png",
-      "email": "zoe@kennel.com",
-      "password": "zoe",
-      "locationId": 2
-    },
-    {
-      "id": 4,
-      "name": "Blaise Roberts",
-      "image": "/images/people/beardPerson.png",
-      "email": "blaise@kennel.com",
-      "password": "blaise",
-      "locationId": 1
-    },
-    {
-      "name": "Gavin Beverage",
-      "image": "/images/people/maleEmployee.png",
-      "email": "gavin@kennel.com",
-      "password": "gavin",
-      "locationId": 2,
-      "id": 5
-    },
-    {
-      "name": "Sydney Wait",
-      "email": "sydney@kennel.com",
-      "image": "/images/people/hipLady.png",
-      "password": "sydney",
-      "locationId": 3,
-      "id": 6
-    },
-    {
-      "name": "Jordan Castelloe",
-      "email": "jordan@kennel.com",
-      "image": "/images/people/hardHatguy.png",
-      "password": "jordan",
-      "locationId": 4,
-      "id": 7
+      "aud": "auth0|5c9a6dbd4270bd0f7e1b29ee",
+      "name": "jessica",
+      "id": 2
     }
   ],
   "locations": [
